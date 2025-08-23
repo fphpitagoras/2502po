@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa Operacional - Prof. Felipe Heitmann</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-900">Pesquisa Operacional</h1>
+                <p class="text-lg text-gray-600 mt-2">Prof. Felipe Heitmann</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        
+        <!-- Welcome Section -->
+        <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-orange-600">Bem-vindo(a) à disciplina!</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Esta página centraliza todas as informações importantes para o nosso semestre. Aqui você encontrará o cronograma das aulas, os conteúdos que serão estudados em cada unidade, as datas das avaliações e os links para os materiais de aula. O objetivo é facilitar sua organização e garantir que você tenha acesso rápido a tudo que precisa para ter sucesso em Pesquisa Operacional.
+            </p>
+            <div class="mt-6 p-4 bg-orange-100 border-l-4 border-orange-500 text-orange-700 rounded-md">
+                <h3 class="font-bold">Contato do Professor</h3>
+                <p><strong>E-mail:</strong> fphpitagoras@gmail.com</p>
+                <p><strong>Telefone:</strong> (31) 97124-4499</p>
+            </div>
+        </section>
+
+        <!-- Course Content Section -->
+        <section id="conteudo" class="mb-8">
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Conteúdo Programático</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 1º Bimestre -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 border-b pb-2 text-orange-600">1º Bimestre</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg">Unidade 1: Modelagem na tomada de decisão</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                                <li>Seção 1.1 - Introdução à pesquisa operacional</li>
+                                <li>Seção 1.2 - Introdução à Modelagem em pesquisa operacional</li>
+                                <li>Seção 1.3 - Construção de modelos em pesquisa operacional</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg">Unidade 2: Programação linear, dualidade e sensibilidade</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                                <li>Seção 2.1 - Introdução à programação linear</li>
+                                <li>Seção 2.2 - Método simplex</li>
+                                <li>Seção 2.3 - Dualidade e análise de sensibilidade</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2º Bimestre -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 border-b pb-2 text-orange-600">2º Bimestre</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg">Unidade 3: Aplicações da programação linear</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                                <li>Seção 3.1 - Uso do Solver na resolução de problemas de pesquisa operacional</li>
+                                <li>Seção 3.2 - Aplicação da PO em problema de transporte</li>
+                                <li>Seção 3.3 - Redes em PO</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg">Unidade 4: Programação inteira e simulação</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-600 space-y-1">
+                                <li>Seção 4.1 - Programação inteira</li>
+                                <li>Seção 4.2 - Cadeia de Markov - simulação em PO</li>
+                                <li>Seção 4.3 - Teoria das filas - simulação em PO</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Schedule and Materials Section -->
+        <section id="cronograma" class="mb-8">
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Cronograma e Materiais de Aula</h2>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-orange-600 border-b pb-2">1º Bimestre</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 01 (04/08): Seção 1.1 - Introdução à pesquisa operacional</a> <a href="https://g.co/gemini/share/1589e79bd830" target="_blank" class="text-green-600 hover:underline font-medium ml-4">(Quiz da Unidade 1 - Seção 1)</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 02 (11/08): Seção 1.2 - Modelagem em pesquisa operacional</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 03 (18/08): Seção 1.3 - Construção de modelos em pesquisa operacional</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 04 (25/08): Seção 2.1 - Introdução à programação linear</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 05 (01/09): Seção 2.2 - Método simplex</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 06 (08/09): Seção 2.3 - Dualidade e análise de sensibilidade</a></li>
+                            <li><a href="#" class="text-gray-500 font-medium">Aula 07 (15/09): Revisão</a></li>
+                            <li><a href="#" class="text-red-700 hover:underline font-bold">Aula 08 (22/09): AVALIAÇÃO OFICIAL 1 – Unidades 1 e 2</a></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4">
+                        <h3 class="text-xl font-bold text-orange-600 border-b pb-2">2º Bimestre</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 09 (29/09): Seção 3.1 - Uso do Solver na resolução de problemas</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 10 (06/10): Seção 3.2 - Aplicação da PO em problema de transporte</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 11 (13/10): Seção 3.3 - Redes em PO</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 12 (20/10): Seção 4.1 - Programação inteira</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 13 (27/10): Seção 4.2 - Cadeia de Markov - simulação em PO</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 14 (03/11): Seção 4.3 - Teoria das filas - simulação em PO</a></li>
+                            <li><a href="#" class="text-gray-500 font-medium">Aula 15 (10/11): Revisão</a></li>
+                            <li><a href="#" class="text-red-700 hover:underline font-bold">Aula 16 (17/11): AVALIAÇÃO OFICIAL 2 – Unidades 1, 2, 3 e 4</a></li>
+                            <li><a href="#" class="text-blue-600 hover:underline font-medium">Aula 17 (24/11): Entrega das Avaliações</a></li>
+                            <li><a href="#" class="text-yellow-800 hover:underline font-bold">Aula 18 (01/12): Avaliação de 2ª Chamada</a></li>
+                            <li><a href="#" class="text-yellow-800 hover:underline font-bold">Aula 19 (09/12): Exame Final</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluation System Section -->
+        <section id="avaliacao" class="mb-8">
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Sistema de Avaliação</h2>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div class="bg-blue-100 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg text-blue-800">Avaliações Oficiais</h4>
+                        <p class="text-2xl font-bold mt-2">5.000 pts</p>
+                        <p class="text-sm text-gray-600">(Oficial 1: 1.000 pts, Oficial 2: 4.000 pts)</p>
+                        <p class="text-sm mt-2 font-semibold">Mínimo: 2.500 pts</p>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg text-green-800">Avaliações Parciais</h4>
+                        <p class="text-2xl font-bold mt-2">2.500 pts</p>
+                        <p class="text-sm text-gray-600">(Parcial 1: 1.000 pts, Parcial 2: 1.500 pts)</p>
+                    </div>
+                    <div class="bg-purple-100 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg text-purple-800">Atividades AVA</h4>
+                        <p class="text-2xl font-bold mt-2">3.000 pts</p>
+                        <p class="text-sm text-gray-600">(Máximo)</p>
+                    </div>
+                     <div class="bg-orange-100 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg text-orange-800">Aprovação</h4>
+                        <p class="text-2xl font-bold mt-2">≥ 6.000 pts</p>
+                        <p class="text-sm text-gray-600">(Soma total)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Useful Links Section -->
+        <section id="links">
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Links Úteis</h2>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <ul class="space-y-3">
+                    <li><a href="https://bit.ly/po202502" target="_blank" class="flex items-center text-blue-600 hover:underline"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>Link Geral da Disciplina</a></li>
+                    <li><a href="https://notebooklm.google.com/notebook/29d40caa-c99a-4082-8f4c-3674a09e4d9a" target="_blank" class="flex items-center text-blue-600 hover:underline"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path></svg>Notebook da Seção 1.1</a></li>
+                    <li><a href="#" target="_blank" class="flex items-center text-green-600 hover:underline"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V7a2 2 0 012-2h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V8z"></path></svg>Grupo de WhatsApp</a></li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-12 py-6 border-t">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 - Prof. Felipe Heitmann. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
