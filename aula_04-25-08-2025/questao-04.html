@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa Operacional - Aula 04-25-08-2025 - questao-04</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0KOVEMcAgsccfgSLGbMHWquCILm8HIhdNQhpGtWP9DY/TO3SUrGuL" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .katex-display {
+            display: block;
+            margin: 1em 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-900">Pesquisa Operacional</h1>
+                <p class="text-lg text-gray-600 mt-2">Prof. Felipe Heitmann</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h1 class="text-3xl font-bold mb-4">Exercícios Resolvidos</h1>
+            <p><strong>Professor:</strong> Felipe Heitmann</p>
+            <p><strong>Disciplina:</strong> Pesquisa Operacional</p>
+            <p><strong>Data:</strong> 23/08/2025</p>
+            <hr class="my-4">
+            <h3 class="text-xl font-bold mb-2">Questão 04:</h3>
+            <blockquote class="border-l-4 border-gray-300 pl-4 italic my-4">
+                <p>Uma indústria de alimentos produz dois tipos de biscoitos: chocolate e aveia. Cada pacote de biscoito de chocolate requer 2 kg de farinha e 1 kg de açúcar. Cada pacote de biscoito de aveia requer 1 kg de farinha e 2 kg de açúcar. A indústria tem 10 kg de farinha e 8 kg de açúcar disponíveis. O lucro por pacote de biscoito de chocolate é de R$ 2,00 e por pacote de biscoito de aveia é de R$ 3,00.</p>
+                <p>a) Quantos pacotes de cada tipo de biscoito a indústria deve produzir para maximizar o lucro?</p>
+                <p>b) Quantos pacotes de cada tipo de biscoito a indústria deve produzir para maximizar a produção?</p>
+            </blockquote>
+            <hr class="my-4">
+            <h3 class="text-xl font-bold mb-2">a) Modelo para Maximização do Lucro</h3>
+            <h4 class="text-lg font-bold mt-4 mb-2">Análise do Problema</h4>
+            <p>O objetivo é determinar a quantidade de pacotes de biscoitos de chocolate e de aveia a serem produzidos para que o lucro total seja o maior possível. As decisões são as quantidades de cada tipo de biscoito. As limitações são as quantidades de farinha e açúcar disponíveis no estoque.</p>
+            <h4 class="text-lg font-bold mt-4 mb-2">Variáveis de Decisão</h4>
+            <p>Para construir o modelo, vamos definir as seguintes variáveis:</p>
+            <ul>
+                <li class="ml-6 list-disc">$x_1$: quantidade de pacotes de biscoito de chocolate a serem produzidos.</li>
+                <li class="ml-6 list-disc">$x_2$: quantidade de pacotes de biscoito de aveia a serem produzidos.</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Função Objetivo</h4>
+            <p>O objetivo é maximizar o lucro total. O lucro é a soma do lucro obtido com a venda de cada tipo de biscoito.</p>
+            <ul>
+                <li class="ml-6 list-disc"><strong>Objetivo:</strong> Maximizar</li>
+                <li class="ml-6 list-disc"><strong>Equação:</strong> $$\text{Maximizar } Z = 2x_1 + 3x_2$$</li>
+                <li class="ml-6 list-disc"><strong>Lógica:</strong> A função calcula o lucro total. O coeficiente 2 representa o lucro de R$2,00 por pacote de biscoito de chocolate ($x_1$), e o coeficiente 3 representa o lucro de R$3,00 por pacote de biscoito de aveia ($x_2$).</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Restrições</h4>
+            <p>As restrições do problema são baseadas nos recursos limitados de matéria-prima.</p>
+            <ol class="list-decimal ml-6">
+                <li><strong>Restrição de Farinha:</strong> A quantidade total de farinha utilizada na produção dos dois tipos de biscoito não pode exceder a quantidade disponível (10 kg).
+                    <ul class="list-disc ml-6">
+                        <li><strong>Explicação:</strong> Cada pacote de biscoito de chocolate ($x_1$) consome 2 kg de farinha e cada pacote de aveia ($x_2$) consome 1 kg.</li>
+                        <li><strong>Equação:</strong> $$2x_1 + 1x_2 \leq 10$$</li>
+                    </ul>
+                </li>
+                <li><strong>Restrição de Açúcar:</strong> O consumo total de açúcar na produção não pode ultrapassar o estoque disponível (8 kg).
+                    <ul class="list-disc ml-6">
+                        <li><strong>Explicação:</strong> Cada pacote de biscoito de chocolate ($x_1$) consome 1 kg de açúcar e cada pacote de aveia ($x_2$) consome 2 kg.</li>
+                        <li><strong>Equação:</strong> $$1x_1 + 2x_2 \leq 8$$</li>
+                    </ul>
+                </li>
+            </ol>
+            <h4 class="text-lg font-bold mt-4 mb-2">Restrições de Não-Negatividade</h4>
+            <p>As quantidades de pacotes produzidos não podem ser negativas.</p>
+            <ul>
+                <li class="ml-6 list-disc"><strong>Equação:</strong> $$x_1, x_2 \geq 0$$</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Modelo Matemático Completo (Lucro)</h4>
+            <p>O modelo matemático final para a maximização do lucro é:</p>
+            $$
+            \begin{aligned}
+            \text{Maximizar } Z &= 2x_1 + 3x_2 \\
+            \text{Sujeito a:} \\
+            2x_1 + x_2 &\leq 10 \\
+            x_1 + 2x_2 &\leq 8 \\
+            x_1, x_2 &\geq 0
+            \end{aligned}
+            $$
+            <hr class="my-4">
+            <h3 class="text-xl font-bold mb-2">b) Modelo para Maximização da Produção</h3>
+            <h4 class="text-lg font-bold mt-4 mb-2">Análise do Problema</h4>
+            <p>Neste cenário, o objetivo muda. Em vez de maximizar o lucro, a indústria quer produzir a maior quantidade total de pacotes de biscoitos, independentemente do lucro de cada um. As decisões (quantidades) e as limitações (recursos) permanecem as mesmas.</p>
+            <h4 class="text-lg font-bold mt-4 mb-2">Variáveis de Decisão</h4>
+            <p>As variáveis de decisão são as mesmas do modelo anterior:</p>
+            <ul>
+                <li class="ml-6 list-disc">$x_1$: quantidade de pacotes de biscoito de chocolate a serem produzidos.</li>
+                <li class="ml-6 list-disc">$x_2$: quantidade de pacotes de biscoito de aveia a serem produzidos.</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Função Objetivo</h4>
+            <p>O objetivo é maximizar a produção total, ou seja, o número total de pacotes fabricados.</p>
+            <ul>
+                <li class="ml-6 list-disc"><strong>Objetivo:</strong> Maximizar</li>
+                <li class="ml-6 list-disc"><strong>Equação:</strong> $$\text{Maximizar } P = x_1 + x_2$$</li>
+                <li class="ml-6 list-disc"><strong>Lógica:</strong> A função soma a quantidade de pacotes de biscoito de chocolate ($x_1$) com a quantidade de pacotes de biscoito de aveia ($x_2$) para obter a produção total.</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Restrições</h4>
+            <p>As restrições de recursos são idênticas às do problema de maximização de lucro, pois a disponibilidade de farinha e açúcar não mudou.</p>
+            <ol class="list-decimal ml-6">
+                <li><strong>Restrição de Farinha:</strong> $$2x_1 + x_2 \leq 10$$</li>
+                <li><strong>Restrição de Açúcar:</strong> $$x_1 + 2x_2 \leq 8$$</li>
+            </ol>
+            <h4 class="text-lg font-bold mt-4 mb-2">Restrições de Não-Negatividade</h4>
+            <p>As quantidades produzidas devem ser não-negativas.</p>
+            <ul>
+                <li class="ml-6 list-disc"><strong>Equação:</strong> $$x_1, x_2 \geq 0$$</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Modelo Matemático Completo (Produção)</h4>
+            <p>O modelo matemático final para a maximização da produção é:</p>
+            $$
+            \begin{aligned}
+            \text{Maximizar } P &= x_1 + x_2 \\
+            \text{Sujeito a:} \\
+            2x_1 + x_2 &\leq 10 \\
+            x_1 + 2x_2 &\leq 8 \\
+            x_1, x_2 &\geq 0
+            \end{aligned}
+            $$
+            <div class="mt-8 flex justify-between items-center">
+                <a href="questao-03.html" class="text-blue-600 hover:underline font-medium">&larr; Questão Anterior</a>
+                <a href="index.html" class="text-gray-600 hover:underline font-medium">Voltar para a Aula</a>
+                <a href="questao-05.html" class="text-blue-600 hover:underline font-medium">Próxima Questão &rarr;</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white mt-12 py-6 border-t">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 - Prof. Felipe Heitmann. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
