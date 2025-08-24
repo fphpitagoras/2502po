@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz: Pesquisa Operacional</title>
+    <title>Pesquisa Operacional - Quiz</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -13,13 +14,13 @@
         .nav-btn {
             width: 32px;
             height: 32px;
-            border: 2px solid #cbd5e1; /* slate-300 */
-            color: #475569; /* slate-600 */
-            background-color: #f8fafc; /* slate-50 */
+            border: 2px solid #d1d5db; /* gray-300 */
+            color: #4b5563; /* gray-600 */
+            background-color: #f9fafb; /* gray-50 */
         }
         .nav-btn.current {
-            border-color: #0f172a; /* slate-900 */
-            background-color: #f1f5f9; /* slate-100 */
+            border-color: #111827; /* gray-900 */
+            background-color: #f3f4f6; /* gray-100 */
             font-weight: bold;
         }
         .nav-btn.answered {
@@ -50,63 +51,92 @@
         }
     </style>
 </head>
-<body class="bg-slate-100 flex items-center justify-center min-h-screen p-4">
+<body class="bg-gray-50 text-gray-800">
 
-    <div class="bg-white w-full max-w-2xl rounded-xl shadow-lg p-6 md:p-8 transition-all duration-500">
-        
-        <!-- Tela de Início -->
-        <div id="start-screen" class="text-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Quiz de Pesquisa Operacional</h2>
-            <p class="mt-2 text-slate-600">Por favor, insira seu nome completo para começar.</p>
-            <div class="mt-6">
-                <input type="text" id="name-input" placeholder="Digite seu nome completo aqui" class="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 outline-none transition">
-                <p id="name-error" class="text-red-500 text-sm mt-2 hidden">O nome é obrigatório.</p>
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-900">Pesquisa Operacional</h1>
+                <p class="text-lg text-gray-600 mt-2">Prof. Felipe Heitmann</p>
             </div>
-            <button id="start-btn" class="w-full mt-4 px-8 py-3 font-bold text-white bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed">Iniciar Quiz</button>
         </div>
+    </header>
 
-        <!-- Container do Quiz -->
-        <div id="quiz-container" class="hidden">
-            <!-- Container da Questão -->
-            <div id="question-screen">
-                <div id="question-nav" class="flex justify-center gap-2 mb-6">
-                    <!-- Botões de navegação das questões -->
-                </div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <div class="w-full max-w-2xl mx-auto">
                 
-                <div class="mb-4">
-                    <p id="progress-text" class="text-sm text-slate-500">Questão 1 de 5</p>
-                    <h2 id="question-text" class="text-lg md:text-xl font-bold text-slate-800 mt-2">Carregando pergunta...</h2>
-                </div>
-
-                <div id="answer-buttons" class="grid grid-cols-1 gap-3 mt-6">
-                    <!-- As alternativas serão inseridas aqui pelo JavaScript -->
-                </div>
-                
-                <div id="hint-container" class="mt-4 p-4 rounded-lg bg-blue-50 border border-blue-200 hidden">
-                    <p class="text-sm text-blue-700"><strong class="font-bold">Dica:</strong> <span id="hint-text"></span></p>
-                </div>
-
-                <div class="flex justify-between items-center mt-6">
-                    <div>
-                        <button id="hint-btn" class="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors">Dica</button>
-                        <button id="skip-btn" class="px-4 py-2 text-sm font-medium text-amber-600 bg-amber-100 rounded-lg hover:bg-amber-200 transition-colors ml-2">Pular</button>
+                <!-- Tela de Início -->
+                <div id="start-screen" class="text-center">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Teste Rápido: Programação Linear</h2>
+                    <p class="mt-2 text-gray-600">Por favor, insira seu nome completo para começar.</p>
+                    <div class="mt-6">
+                        <input type="text" id="name-input" placeholder="Digite seu nome completo aqui" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition">
+                        <p id="name-error" class="text-red-500 text-sm mt-2 hidden">O nome é obrigatório.</p>
                     </div>
-                    <button id="next-btn" class="px-6 py-2 text-sm font-medium text-white bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors hidden">Próxima</button>
+                    <button id="start-btn" class="w-full mt-4 px-8 py-3 font-bold text-white bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">Iniciar Quiz</button>
+                </div>
+
+                <!-- Container do Quiz -->
+                <div id="quiz-container" class="hidden">
+                    <!-- Container da Questão -->
+                    <div id="question-screen">
+                        <div id="question-nav" class="flex justify-center gap-2 mb-6">
+                            <!-- Botões de navegação das questões -->
+                        </div>
+
+                        <div class="mb-4">
+                            <p id="progress-text" class="text-sm text-gray-500">Questão 1 de 5</p>
+                            <h2 id="question-text" class="text-lg md:text-xl font-bold text-gray-800 mt-2">Carregando pergunta...</h2>
+                        </div>
+
+                        <div id="answer-buttons" class="grid grid-cols-1 gap-3 mt-6">
+                            <!-- As alternativas serão inseridas aqui pelo JavaScript -->
+                        </div>
+
+                        <div id="hint-container" class="mt-4 p-4 rounded-lg bg-blue-50 border border-blue-200 hidden">
+                            <p class="text-sm text-blue-700"><strong class="font-bold">Dica:</strong> <span id="hint-text"></span></p>
+                        </div>
+
+                        <div class="flex justify-between items-center mt-6">
+                            <div>
+                                <button id="hint-btn" class="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors">Dica</button>
+                                <button id="skip-btn" class="px-4 py-2 text-sm font-medium text-amber-600 bg-amber-100 rounded-lg hover:bg-amber-200 transition-colors ml-2">Pular</button>
+                            </div>
+                            <button id="next-btn" class="px-6 py-2 text-sm font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors hidden">Próxima</button>
+                        </div>
+                    </div>
+
+                    <!-- Container de Resultados -->
+                    <div id="results-screen" class="text-center hidden">
+                        <h3 id="user-name-display" class="text-2xl font-bold text-gray-800 break-words"></h3>
+                        <p id="score-text" class="mt-2 text-lg text-gray-600">Você acertou 0 de 5 questões.</p>
+                        <img id="result-image" src="https://placehold.co/400x250/e2e8f0/475569?text=Resultado" alt="Imagem de resultado" class="mx-auto my-6 rounded-lg">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <button id="restart-btn" class="w-full px-8 py-3 font-bold text-gray-800 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">Tentar Novamente</button>
+                            <a id="send-results-btn" href="#" target="_blank" class="w-full block px-8 py-3 font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors">Enviar para o professor</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Container de Resultados -->
-            <div id="results-screen" class="text-center hidden">
-                <h3 id="user-name-display" class="text-2xl font-bold text-slate-800 break-words"></h3>
-                <p id="score-text" class="mt-2 text-lg text-slate-600">Você acertou 0 de 5 questões.</p>
-                <img id="result-image" src="https://placehold.co/400x250/e2e8f0/475569?text=Resultado" alt="Imagem de resultado" class="mx-auto my-6 rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <button id="restart-btn" class="w-full px-8 py-3 font-bold text-slate-800 bg-slate-200 rounded-lg hover:bg-slate-300 transition-colors">Tentar Novamente</button>
-                    <a id="send-results-btn" href="#" target="_blank" class="w-full block px-8 py-3 font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors">Enviar para o professor</a>
-                </div>
+            <!-- Navigation -->
+            <div class="mt-8 flex justify-between items-center border-t pt-4">
+                <span><a href="../aula_03-18-08-2025/index.html" class="text-blue-600 hover:underline font-medium"> &larr; Aula Anterior</a></span>
+                <a href="../index.html" class="text-gray-600 hover:underline font-medium">Página Principal</a>
+                <span><a href="../aula_05-01-09-2025/index.html" class="text-blue-600 hover:underline font-medium">Próxima Aula &rarr;</a></span>
             </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-12 py-6 border-t">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 - Prof. Felipe Heitmann. Todos os direitos reservados.</p>
         </div>
-    </div>
+    </footer>
 
     <script>
         // --- DADOS DO QUIZ ---
@@ -234,7 +264,7 @@
 
             currentQuestion.answers.forEach((answer, answerIndex) => {
                 const button = document.createElement('button');
-                button.classList.add('btn-answer', 'w-full', 'p-4', 'text-left', 'bg-slate-50', 'border-2', 'border-slate-200', 'rounded-lg', 'hover:bg-slate-100', 'hover:border-slate-300', 'transition-colors', 'flex', 'flex-col', 'items-start');
+                button.classList.add('btn-answer', 'w-full', 'p-4', 'text-left', 'bg-gray-50', 'border-2', 'border-gray-200', 'rounded-lg', 'hover:bg-gray-100', 'hover:border-gray-300', 'transition-colors', 'flex', 'flex-col', 'items-start');
                 
                 const answerText = document.createElement('span');
                 answerText.innerText = answer.text;
