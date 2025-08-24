@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercícios Resolvidos - Pesquisa Operacional</title>
-    
+    <title>Pesquisa Operacional - Questão 01</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
     <script>
     MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true, // Garante que \$ seja tratado como um caractere literal
+        processEscapes: true,
         tags: 'ams'
       },
       svg: {
@@ -19,182 +25,122 @@
     };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fdfdfd;
-        }
-        h1, h2, h3, h4 {
-            color: #2c3e50;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
-        }
-        hr {
-            border: 0;
-            height: 1px;
-            background: #bdc3c7;
-            margin: 2em 0;
-        }
-        blockquote {
-            background: #ecf0f1;
-            border-left: 5px solid #3498db;
-            margin: 1.5em 0;
-            padding: 1em 15px;
-            font-style: italic;
-        }
-        ul, ol {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 0.5em;
-        }
-        strong {
-            color: #2980b9;
-        }
-    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-    <h1>Exercícios Resolvidos</h1>
-    <p><strong>Professor:</strong> Felipe Heitmann</p>
-    <p><strong>Disciplina:</strong> Pesquisa Operacional</p>
-    <p><strong>Data:</strong> 23/08/2025</p>
-    
-    <hr>
-    
-    <h3>Questão 01:</h3>
-    <blockquote>
-        <p>
-        Um agricultor possui 10 hectares de terra para plantar dois tipos de culturas: milho e soja. O milho requer 1 hora de trabalho por hectare e 2 unidades de fertilizante, enquanto a soja requer 2 horas de trabalho por hectare e 1 unidade de fertilizante. O agricultor tem 16 horas de trabalho disponíveis e 12 unidades de fertilizante. O lucro por hectare de milho é de R\$ 300,00 e por hectare de soja é de R\$ 200,00.
-        <br>a) Quantos hectares de cada cultura o agricultor deve plantar para maximizar o lucro?
-        <br>b) Quantos hectares de cada cultura o agricultor deve plantar para maximizar a produção, ou seja, desconsiderando o lucro por hectare de cada cultura?
-        </p>
-    </blockquote>
-    
-    <hr>
-    
-    <h3><strong>Solução (a): Maximização do Lucro</strong></h3>
-    
-    <h4><strong>Análise do Problema</strong></h4>
-    <p>O objetivo do agricultor é determinar a quantidade de hectares de milho e de soja a serem plantados para que seu lucro total seja o maior possível. As decisões sobre o plantio estão limitadas pela área total de terra, pela quantidade de horas de trabalho e pela quantidade de fertilizante disponíveis.</p>
-    
-    <h4><strong>Variáveis de Decisão</strong></h4>
-    <p>Para construir o modelo, precisamos definir as variáveis que representarão as decisões a serem tomadas.</p>
-    <ul>
-        <li>$x_1$: Representa a quantidade, em hectares, de milho a ser plantada.</li>
-        <li>$x_2$: Representa a quantidade, em hectares, de soja a ser plantada.</li>
-    </ul>
-    
-    <h4><strong>Função Objetivo</strong></h4>
-    <p>O objetivo principal é maximizar o lucro total. O lucro é a soma do lucro obtido com a plantação de milho e o lucro obtido com a plantação de soja.</p>
-    <ul>
-        <li><strong>Objetivo:</strong> Maximizar o Lucro Total ($Z$)</li>
-        <li><strong>Equação:</strong>
-            $$
-            \text{Maximizar } Z = 300x_1 + 200x_2
-            $$
-        </li>
-        <li><strong>Lógica:</strong> O lucro total $Z$ é calculado multiplicando-se a quantidade de hectares de cada cultura ($x_1$ e $x_2$) pelo seu respectivo lucro por hectare (R\$ 300,00 para o milho e R\$ 200,00 para a soja).</li>
-    </ul>
-    
-    <h4><strong>Restrições</strong></h4>
-    <p>As decisões do agricultor estão sujeitas a três limitações físicas (recursos).</p>
-    <ol>
-        <li>
-            <p><strong>Restrição de Terra:</strong> O agricultor possui um total de 10 hectares. A soma da área plantada com milho e soja não pode ultrapassar esse limite.</p>
-            <ul>
-                <li><strong>Propósito:</strong> Limitar a área total de plantio.</li>
-                <li><strong>Equação:</strong>
-                    $$
-                    x_1 + x_2 \le 10
-                    $$
-                </li>
-            </ul>
-        </li>
-        <li>
-            <p><strong>Restrição de Trabalho:</strong> O agricultor tem um limite de 16 horas de trabalho. Cada hectare de milho consome 1 hora e cada hectare de soja consome 2 horas.</p>
-            <ul>
-                <li><strong>Propósito:</strong> Garantir que o tempo total de trabalho não exceda o disponível.</li>
-                <li><strong>Equação:</strong>
-                    $$
-                    1x_1 + 2x_2 \le 16
-                    $$
-                </li>
-            </ul>
-        </li>
-        <li>
-            <p><strong>Restrição de Fertilizante:</strong> Há 12 unidades de fertilizante disponíveis. O milho requer 2 unidades por hectare e a soja requer 1 unidade por hectare.</p>
-            <ul>
-                <li><strong>Propósito:</strong> Limitar o consumo total de fertilizante.</li>
-                <li><strong>Equação:</strong>
-                    $$
-                    2x_1 + 1x_2 \le 12
-                    $$
-                </li>
-            </ul>
-        </li>
-    </ol>
-    
-    <h4><strong>Restrições de Não-Negatividade</strong></h4>
-    <p>As variáveis de decisão representam uma quantidade física (área de terra), portanto, não podem assumir valores negativos.</p>
-    <ul>
-        <li><strong>Equação:</strong>
-            $$
-            x_1, x_2 \ge 0
-            $$
-        </li>
-    </ul>
-    
-    <h4><strong>Modelo Matemático Completo (a)</strong></h4>
-    <p>Juntando todos os componentes, o modelo matemático final para a maximização do lucro é:</p>
-    $$
-    \begin{align*}
-    \text{Maximizar } Z = 300x_1 + 200x_2 \\
-    \text{Sujeito a:} \\
-    x_1 + x_2 &\le 10 \quad \text{(Terra)} \\
-    x_1 + 2x_2 &\le 16 \quad \text{(Trabalho)} \\
-    2x_1 + x_2 &\le 12 \quad \text{(Fertilizante)} \\
-    x_1, x_2 &\ge 0
-    \end{align*}
-    $$
-    
-    <hr>
-    
-    <h3><strong>Solução (b): Maximização da Produção</strong></h3>
-    
-    <h4><strong>Análise do Problema</strong></h4>
-    <p>Neste cenário, o objetivo muda. Em vez de maximizar o lucro, o agricultor deseja maximizar a área total cultivada, ou seja, a produção total em hectares. As restrições de terra, trabalho e fertilizante permanecem as mesmas.</p>
-    
-    <h4><strong>Função Objetivo</strong></h4>
-    <p>O novo objetivo é maximizar a quantidade total de hectares plantados.</p>
-    <ul>
-        <li><strong>Objetivo:</strong> Maximizar a Produção Total ($P$)</li>
-        <li><strong>Equação:</strong>
-            $$
-            \text{Maximizar } P = x_1 + x_2
-            $$
-        </li>
-        <li><strong>Lógica:</strong> A produção total, medida em hectares, é simplesmente a soma dos hectares de milho ($x_1$) e dos hectares de soja ($x_2$).</li>
-    </ul>
-    
-    <h4><strong>Modelo Matemático Completo (b)</strong></h4>
-    <p>As restrições não se alteram. Apenas a função objetivo é modificada.</p>
-    $$
-    \begin{align*}
-    \text{Maximizar } P = x_1 + x_2 \\
-    \text{Sujeito a:} \\
-    x_1 + x_2 &\le 10 \quad \text{(Terra)} \\
-    x_1 + 2x_2 &\le 16 \quad \text{(Trabalho)} \\
-    2x_1 + x_2 &\le 12 \quad \text{(Fertilizante)} \\
-    x_1, x_2 &\ge 0
-    \end{align*}
-    $$
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-900">Pesquisa Operacional</h1>
+                <p class="text-lg text-gray-600 mt-2">Prof. Felipe Heitmann</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-orange-600 border-b pb-2">Questão 01</h2>
+
+            <div class="mt-4">
+                <blockquote class="bg-gray-100 p-4 rounded-lg border-l-4 border-blue-500 my-4 text-gray-700">
+                    Um agricultor possui 10 hectares de terra para plantar dois tipos de culturas: milho e soja. O milho requer 1 hora de trabalho por hectare e 2 unidades de fertilizante, enquanto a soja requer 2 horas de trabalho por hectare e 1 unidade de fertilizante. O agricultor tem 16 horas de trabalho disponíveis e 12 unidades de fertilizante. O lucro por hectare de milho é de R\$ 300,00 e por hectare de soja é de R\$ 200,00.
+                    <br>a) Quantos hectares de cada cultura o agricultor deve plantar para maximizar o lucro?
+                    <br>b) Quantos hectares de cada cultura o agricultor deve plantar para maximizar a produção, ou seja, desconsiderando o lucro por hectare de cada cultura?
+                </blockquote>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Solução (a): Maximização do Lucro</h3>
+
+                <h4 class="font-semibold text-lg mt-4">Análise do Problema</h4>
+                <p class="text-gray-700 leading-relaxed">O objetivo do agricultor é determinar a quantidade de hectares de milho e de soja a serem plantados para que seu lucro total seja o maior possível. As decisões sobre o plantio estão limitadas pela área total de terra, pela quantidade de horas de trabalho e pela quantidade de fertilizante disponíveis.</p>
+
+                <h4 class="font-semibold text-lg mt-4">Variáveis de Decisão</h4>
+                <p class="text-gray-700 leading-relaxed">Para construir o modelo, precisamos definir as variáveis que representarão as decisões a serem tomadas.</p>
+                <ul class="list-disc list-inside space-y-2 mt-2 text-gray-700">
+                    <li>$x_1$: Representa a quantidade, em hectares, de milho a ser plantada.</li>
+                    <li>$x_2$: Representa a quantidade, em hectares, de soja a ser plantada.</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg mt-4">Função Objetivo</h4>
+                <p class="text-gray-700 leading-relaxed">O objetivo principal é maximizar o lucro total. O lucro é a soma do lucro obtido com a plantação de milho e o lucro obtido com a plantação de soja.</p>
+                <ul class="list-disc list-inside space-y-2 mt-2 bg-gray-50 p-3 rounded">
+                    <li><strong>Objetivo:</strong> Maximizar o Lucro Total ($Z$)</li>
+                    <li><strong>Equação:</strong> $$ \text{Maximizar } Z = 300x_1 + 200x_2 $$</li>
+                    <li><strong>Lógica:</strong> O lucro total $Z$ é calculado multiplicando-se a quantidade de hectares de cada cultura ($x_1$ e $x_2$) pelo seu respectivo lucro por hectare (R\$ 300,00 para o milho e R\$ 200,00 para a soja).</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg mt-4">Restrições</h4>
+                <p class="text-gray-700 leading-relaxed">As decisões do agricultor estão sujeitas a três limitações físicas (recursos).</p>
+                <ol class="list-decimal list-inside space-y-2 mt-2 text-gray-700">
+                    <li><strong>Restrição de Terra:</strong> A soma da área plantada com milho e soja não pode ultrapassar 10 hectares. <br>$$ x_1 + x_2 \le 10 $$</li>
+                    <li><strong>Restrição de Trabalho:</strong> O tempo total de trabalho não pode exceder 16 horas. <br>$$ 1x_1 + 2x_2 \le 16 $$</li>
+                    <li><strong>Restrição de Fertilizante:</strong> O consumo total de fertilizante não pode ultrapassar 12 unidades. <br>$$ 2x_1 + x_2 \le 12 $$</li>
+                </ol>
+
+                <h4 class="font-semibold text-lg mt-4">Restrições de Não-Negatividade</h4>
+                <p class="text-gray-700 leading-relaxed">As variáveis de decisão representam uma quantidade física (área de terra), portanto, não podem assumir valores negativos.</p>
+                $$ x_1, x_2 \ge 0 $$
+
+                <h4 class="font-semibold text-lg mt-4">Modelo Matemático Completo (a)</h4>
+                <div class="bg-gray-100 p-4 rounded-lg mt-2">
+                $$
+                \begin{align*}
+                \text{Maximizar } Z &= 300x_1 + 200x_2 \\
+                \text{Sujeito a:} \\
+                x_1 + x_2 &\le 10 \quad \text{(Terra)} \\
+                x_1 + 2x_2 &\le 16 \quad \text{(Trabalho)} \\
+                2x_1 + x_2 &\le 12 \quad \text{(Fertilizante)} \\
+                x_1, x_2 &\ge 0
+                \end{align*}
+                $$
+                </div>
+            </div>
+
+            <div class="mt-6 border-t pt-4">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Solução (b): Maximização da Produção</h3>
+
+                <h4 class="font-semibold text-lg mt-4">Análise do Problema</h4>
+                <p class="text-gray-700 leading-relaxed">Neste cenário, o objetivo muda. Em vez de maximizar o lucro, o agricultor deseja maximizar a área total cultivada, ou seja, a produção total em hectares. As restrições de terra, trabalho e fertilizante permanecem as mesmas.</p>
+
+                <h4 class="font-semibold text-lg mt-4">Função Objetivo</h4>
+                <p class="text-gray-700 leading-relaxed">O novo objetivo é maximizar a quantidade total de hectares plantados.</p>
+                 <ul class="list-disc list-inside space-y-2 mt-2 bg-gray-50 p-3 rounded">
+                    <li><strong>Objetivo:</strong> Maximizar a Produção Total ($P$)</li>
+                    <li><strong>Equação:</strong> $$ \text{Maximizar } P = x_1 + x_2 $$</li>
+                    <li><strong>Lógica:</strong> A produção total, medida em hectares, é simplesmente a soma dos hectares de milho ($x_1$) e dos hectares de soja ($x_2$).</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg mt-4">Modelo Matemático Completo (b)</h4>
+                 <div class="bg-gray-100 p-4 rounded-lg mt-2">
+                $$
+                \begin{align*}
+                \text{Maximizar } P &= x_1 + x_2 \\
+                \text{Sujeito a:} \\
+                x_1 + x_2 &\le 10 \quad \text{(Terra)} \\
+                x_1 + 2x_2 &\le 16 \quad \text{(Trabalho)} \\
+                2x_1 + x_2 &\le 12 \quad \text{(Fertilizante)} \\
+                x_1, x_2 &\ge 0
+                \end{align*}
+                $$
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="mt-8 flex justify-start items-center">
+                <a href="./index.html" class="text-blue-600 hover:underline font-medium">&larr; Voltar para a Aula 04</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-12 py-6 border-t">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 - Prof. Felipe Heitmann. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
