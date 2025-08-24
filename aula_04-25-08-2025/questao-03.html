@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercícios Resolvidos - Pesquisa Operacional</title>
-    
+    <title>Pesquisa Operacional - Questão 03</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
     <script>
     MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true, // Garante que \$ seja tratado como um caractere literal
+        processEscapes: true,
         tags: 'ams'
       },
       svg: {
@@ -19,196 +25,112 @@
     };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fdfdfd;
-        }
-        h1, h2, h3, h4 {
-            color: #2c3e50;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
-        }
-        hr {
-            border: 0;
-            height: 1px;
-            background: #bdc3c7;
-            margin: 2em 0;
-        }
-        blockquote {
-            background: #ecf0f1;
-            border-left: 5px solid #3498db;
-            margin: 1.5em 0;
-            padding: 1em 15px;
-            font-style: italic;
-        }
-        ul, ol {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 0.5em;
-        }
-        strong {
-            color: #2980b9;
-        }
-    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-    <h1>Exercícios Resolvidos</h1>
-    <p><strong>Professor:</strong> Felipe Heitmann</p>
-    <p><strong>Disciplina:</strong> Pesquisa Operacional</p>
-    <p><strong>Data:</strong> 23/08/2025</p>
-    
-    <hr>
-    
-    <h3>Questão 03:</h3>
-    <blockquote>
-        <p>
-        Uma refinaria de petróleo produz gasolina e diesel. Cada barril de gasolina requer 3 horas de processamento na unidade de destilação e 1 hora na unidade de craqueamento. Cada barril de diesel requer 2 horas na unidade de destilação e 2 horas na unidade de craqueamento. A refinaria tem 12 horas disponíveis na unidade de destilação e 8 horas na unidade de craqueamento. O lucro por barril de gasolina é de R\$ 40,00 e por barril de diesel é de R\$ 30,00.
-        <br>a) Quantos barris de gasolina e diesel a refinaria deve produzir para maximizar o lucro?
-        <br>b) Quantos barris de gasolina e diesel a refinaria deve produzir para maximizar a produção?
-        </p>
-    </blockquote>
-    
-    <hr>
-    
-    <h3><strong>a) Modelo para Maximização do Lucro</strong></h3>
-    
-    <h4><strong>Análise do Problema</strong></h4>
-    <p>O objetivo é determinar a quantidade de barris de gasolina e de diesel que devem ser produzidos para que o lucro total da refinaria seja o maior possível. As decisões são as quantidades a serem produzidas de cada combustível. Essas decisões estão limitadas pela disponibilidade de tempo de processamento nas unidades de destilação e de craqueamento.</p>
-    
-    <h4><strong>Variáveis de Decisão</strong></h4>
-    <p>Para modelar o problema, definimos as seguintes variáveis:</p>
-    <ul>
-        <li>$x_g$: representa a quantidade de barris de gasolina a ser produzida.</li>
-        <li>$x_d$: representa a quantidade de barris de diesel a ser produzida.</li>
-    </ul>
-    
-    <h4><strong>Função Objetivo</strong></h4>
-    <p>O objetivo principal é maximizar o lucro total. O lucro é a soma do lucro obtido com a venda de gasolina e do lucro obtido com a venda de diesel.</p>
-    <ul>
-        <li><strong>Objetivo:</strong> Maximizar Lucro</li>
-        <li><strong>Equação:</strong>
-            $$
-            \text{Maximizar } Z = 40x_g + 30x_d
-            $$
-        </li>
-        <li><strong>Lógica:</strong> A função soma o lucro gerado pela produção de gasolina (R\$40 por barril, ou $40x_g$) e o lucro gerado pela produção de diesel (R\$30 por barril, ou $30x_d$).</li>
-    </ul>
-    
-    <h4><strong>Restrições</strong></h4>
-    <p>As decisões de produção estão sujeitas às seguintes limitações de capacidade:</p>
-    <ul>
-        <li>
-            <p><strong>Restrição 1: Disponibilidade na Unidade de Destilação</strong></p>
-            <ul>
-                <li><strong>Propósito:</strong> O tempo total utilizado para processar gasolina e diesel na unidade de destilação não pode exceder as 12 horas disponíveis.</li>
-                <li><strong>Equação:</strong>
-                    $$
-                    3x_g + 2x_d \le 12
-                    $$
-                </li>
-            </ul>
-        </li>
-        <li>
-            <p><strong>Restrição 2: Disponibilidade na Unidade de Craqueamento</strong></p>
-            <ul>
-                <li><strong>Propósito:</strong> O tempo total utilizado para processar os dois combustíveis na unidade de craqueamento não pode ultrapassar as 8 horas disponíveis.</li>
-                <li><strong>Equação:</strong>
-                    $$
-                    1x_g + 2x_d \le 8
-                    $$
-                </li>
-            </ul>
-        </li>
-    </ul>
-    
-    <h4><strong>Restrições de Não-Negatividade</strong></h4>
-    <p>É impossível produzir uma quantidade negativa de barris. Portanto, as variáveis de decisão devem ser maiores ou iguais a zero.</p>
-    <ul>
-        <li><strong>Equação:</strong>
-            $$
-            x_g, x_d \ge 0
-            $$
-        </li>
-    </ul>
-    
-    <h4><strong>Modelo Matemático Completo (a)</strong></h4>
-    <p>O modelo de programação linear para maximizar o lucro é:</p>
-    $$
-    \begin{align*}
-    \text{Maximizar } Z &= 40x_g + 30x_d \\
-    \text{Sujeito a:} \\
-    3x_g + 2x_d &\le 12 \\
-    x_g + 2x_d &\le 8 \\
-    x_g, x_d &\ge 0
-    \end{align*}
-    $$
-    
-    <hr>
-    
-    <h3><strong>b) Modelo para Maximização da Produção</strong></h3>
-    
-    <h4><strong>Análise do Problema</strong></h4>
-    <p>Neste cenário, o objetivo muda. Em vez de focar no lucro, a refinaria deseja maximizar a quantidade total de barris produzidos (gasolina + diesel), mantendo as mesmas limitações de processo. As variáveis de decisão e as restrições de capacidade permanecem as mesmas.</p>
-    
-    <h4><strong>Variáveis de Decisão</strong></h4>
-    <p>As variáveis de decisão são idênticas às da parte (a):</p>
-    <ul>
-        <li>$x_g$: representa a quantidade de barris de gasolina a ser produzida.</li>
-        <li>$x_d$: representa a quantidade de barris de diesel a ser produzida.</li>
-    </ul>
-    
-    <h4><strong>Função Objetivo</strong></h4>
-    <p>O novo objetivo é maximizar a produção total, ou seja, a soma do número de barris de gasolina e diesel.</p>
-    <ul>
-        <li><strong>Objetivo:</strong> Maximizar Produção Total</li>
-        <li><strong>Equação:</strong>
-            $$
-            \text{Maximizar } P = x_g + x_d
-            $$
-        </li>
-        <li><strong>Lógica:</strong> A função soma a quantidade total de barris de gasolina ($x_g$) e a quantidade total de barris de diesel ($x_d$) para obter a produção total.</li>
-    </ul>
-    
-    <h4><strong>Restrições</strong></h4>
-    <p>As restrições de capacidade das unidades de destilação e craqueamento, assim como as de não-negatividade, são as mesmas do problema anterior.</p>
-    <ul>
-        <li><strong>Disponibilidade na Unidade de Destilação:</strong>
-            $$
-            3x_g + 2x_d \le 12
-            $$
-        </li>
-        <li><strong>Disponibilidade na Unidade de Craqueamento:</strong>
-            $$
-            1x_g + 2x_d \le 8
-            $$
-        </li>
-        <li><strong>Não-Negatividade:</strong>
-            $$
-            x_g, x_d \ge 0
-            $$
-        </li>
-    </ul>
-    
-    <h4><strong>Modelo Matemático Completo (b)</strong></h4>
-    <p>O modelo de programação linear para maximizar a produção total é:</p>
-    $$
-    \begin{align*}
-    \text{Maximizar } P &= x_g + x_d \\
-    \text{Sujeito a:} \\
-    3x_g + 2x_d &\le 12 \\
-    x_g + 2x_d &\le 8 \\
-    x_g, x_d &\ge 0
-    \end{align*}
-    $$
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-900">Pesquisa Operacional</h1>
+                <p class="text-lg text-gray-600 mt-2">Prof. Felipe Heitmann</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-orange-600 border-b pb-2">Questão 03</h2>
+
+            <div class="mt-4">
+                <blockquote class="bg-gray-100 p-4 rounded-lg border-l-4 border-blue-500 my-4 text-gray-700">
+                    Uma refinaria de petróleo produz gasolina e diesel. Cada barril de gasolina requer 3 horas de processamento na unidade de destilação e 1 hora na unidade de craqueamento. Cada barril de diesel requer 2 horas na unidade de destilação e 2 horas na unidade de craqueamento. A refinaria tem 12 horas disponíveis na unidade de destilação e 8 horas na unidade de craqueamento. O lucro por barril de gasolina é de R\$ 40,00 e por barril de diesel é de R\$ 30,00.
+                    <br>a) Quantos barris de gasolina e diesel a refinaria deve produzir para maximizar o lucro?
+                    <br>b) Quantos barris de gasolina e diesel a refinaria deve produzir para maximizar a produção?
+                </blockquote>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">a) Modelo para Maximização do Lucro</h3>
+
+                <h4 class="font-semibold text-lg mt-4">Análise do Problema</h4>
+                <p class="text-gray-700 leading-relaxed">O objetivo é determinar a quantidade de barris de gasolina e de diesel que devem ser produzidos para que o lucro total da refinaria seja o maior possível. As decisões são as quantidades a serem produzidas de cada combustível. Essas decisões estão limitadas pela disponibilidade de tempo de processamento nas unidades de destilação e de craqueamento.</p>
+
+                <h4 class="font-semibold text-lg mt-4">Variáveis de Decisão</h4>
+                <ul class="list-disc list-inside space-y-2 mt-2 text-gray-700">
+                    <li>$x_g$: representa a quantidade de barris de gasolina a ser produzida.</li>
+                    <li>$x_d$: representa a quantidade de barris de diesel a ser produzida.</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg mt-4">Função Objetivo</h4>
+                <ul class="list-disc list-inside space-y-2 mt-2 bg-gray-50 p-3 rounded">
+                    <li><strong>Objetivo:</strong> Maximizar Lucro</li>
+                    <li><strong>Equação:</strong> $$ \text{Maximizar } Z = 40x_g + 30x_d $$</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg mt-4">Restrições</h4>
+                 <ol class="list-decimal list-inside space-y-2 mt-2 text-gray-700">
+                    <li><strong>Disponibilidade na Unidade de Destilação:</strong> Não pode exceder 12 horas.<br>$$ 3x_g + 2x_d \le 12 $$</li>
+                    <li><strong>Disponibilidade na Unidade de Craqueamento:</strong> Não pode ultrapassar 8 horas.<br>$$ 1x_g + 2x_d \le 8 $$</li>
+                </ol>
+
+                <h4 class="font-semibold text-lg mt-4">Restrições de Não-Negatividade</h4>
+                $$ x_g, x_d \ge 0 $$
+
+                <h4 class="font-semibold text-lg mt-4">Modelo Matemático Completo (a)</h4>
+                <div class="bg-gray-100 p-4 rounded-lg mt-2">
+                $$
+                \begin{align*}
+                \text{Maximizar } Z &= 40x_g + 30x_d \\
+                \text{Sujeito a:} \\
+                3x_g + 2x_d &\le 12 \\
+                x_g + 2x_d &\le 8 \\
+                x_g, x_d &\ge 0
+                \end{align*}
+                $$
+                </div>
+            </div>
+
+            <div class="mt-6 border-t pt-4">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">b) Modelo para Maximização da Produção</h3>
+
+                <h4 class="font-semibold text-lg mt-4">Análise do Problema</h4>
+                <p class="text-gray-700 leading-relaxed">Neste cenário, o objetivo muda. Em vez de focar no lucro, a refinaria deseja maximizar a quantidade total de barris produzidos (gasolina + diesel), mantendo as mesmas limitações de processo.</p>
+
+                <h4 class="font-semibold text-lg mt-4">Função Objetivo</h4>
+                <ul class="list-disc list-inside space-y-2 mt-2 bg-gray-50 p-3 rounded">
+                    <li><strong>Objetivo:</strong> Maximizar Produção Total</li>
+                    <li><strong>Equação:</strong> $$ \text{Maximizar } P = x_g + x_d $$</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg mt-4">Modelo Matemático Completo (b)</h4>
+                <div class="bg-gray-100 p-4 rounded-lg mt-2">
+                $$
+                \begin{align*}
+                \text{Maximizar } P &= x_g + x_d \\
+                \text{Sujeito a:} \\
+                3x_g + 2x_d &\le 12 \\
+                x_g + 2x_d &\le 8 \\
+                x_g, x_d &\ge 0
+                \end{align*}
+                $$
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="mt-8 flex justify-start items-center">
+                <a href="./index.html" class="text-blue-600 hover:underline font-medium">&larr; Voltar para a Aula 04</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-12 py-6 border-t">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 - Prof. Felipe Heitmann. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
