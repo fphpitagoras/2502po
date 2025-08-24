@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa Operacional - Aula 04-25-08-2025 - questao-05</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0KOVEMcAgsccfgSLGbMHWquCILm8HIhdNQhpGtWP9DY/TO3SUrGuL" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .katex-display {
+            display: block;
+            margin: 1em 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-900">Pesquisa Operacional</h1>
+                <p class="text-lg text-gray-600 mt-2">Prof. Felipe Heitmann</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h1 class="text-3xl font-bold mb-4">Exercícios Resolvidos</h1>
+            <p><strong>Professor:</strong> Felipe Heitmann</p>
+            <p><strong>Disciplina:</strong> Pesquisa Operacional</p>
+            <p><strong>Data:</strong> 23/08/2025</p>
+            <hr class="my-4">
+            <h3 class="text-xl font-bold mb-2">Questão 05:</h3>
+            <blockquote class="border-l-4 border-gray-300 pl-4 italic my-4">
+                <p>Uma confecção de roupas produz calças e camisas. Cada calça requer 2 metros de tecido e 1 hora de costura. Cada camisa requer 1 metro de tecido e 2 horas de costura. A confecção tem 10 metros de tecido e 12 horas de costura disponíveis. O lucro por calça é de R$ 20,00 e por camisa é de R$ 15,00.</p>
+                <p>a) Quantas calças e camisas a confecção deve produzir para maximizar o lucro?</p>
+                <p>b) Quantas calças e camisas a confecção deve produzir para maximizar a produção?</p>
+            </blockquote>
+            <hr class="my-4">
+            <h3 class="text-xl font-bold mb-2">Parte A: Maximização do Lucro</h3>
+            <h4 class="text-lg font-bold mt-4 mb-2">Análise do Problema</h4>
+            <p>O objetivo principal aqui é determinar a quantidade ideal de calças e camisas a serem produzidas para que o lucro total seja o maior possível. As decisões a serem tomadas são quantas unidades de cada peça produzir. Essas decisões são limitadas pela quantidade de recursos disponíveis, que são o tecido e o tempo de costura.</p>
+            <h4 class="text-lg font-bold mt-4 mb-2">Variáveis de Decisão</h4>
+            <p>Para construir o modelo, precisamos definir as variáveis que representarão as quantidades que queremos descobrir.</p>
+            <ul>
+                <li class="ml-6 list-disc">$x_1$: Representa a quantidade de <strong>calças</strong> a serem produzidas.</li>
+                <li class="ml-6 list-disc">$x_2$: Representa a quantidade de <strong>camisas</strong> a serem produzidas.</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Função Objetivo</h4>
+            <p>A função objetivo representa a meta que queremos alcançar. Neste caso, queremos maximizar o lucro total.</p>
+            <ul>
+                <li class="ml-6 list-disc"><strong>Objetivo:</strong> Maximizar Lucro</li>
+                <li class="ml-6 list-disc"><strong>Equação:</strong> $$\text{Maximizar } Z = 20x_1 + 15x_2$$</li>
+                <li class="ml-6 list-disc"><strong>Explicação:</strong> O lucro total ($Z$) é a soma do lucro obtido com as calças e do lucro obtido com as camisas. Como cada calça ($x_1$) gera um lucro de R$ 20,00 e cada camisa ($x_2$) gera um lucro de R$ 15,00, a fórmula representa o lucro total em função das quantidades produzidas.</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Restrições</h4>
+            <p>As restrições representam as limitações de recursos ou outras regras que devemos seguir.</p>
+            <ol class="list-decimal ml-6">
+                <li><strong>Restrição de Tecido:</strong>
+                    <ul class="list-disc ml-6">
+                        <li><strong>Propósito:</strong> Garante que a quantidade total de tecido utilizada na produção não exceda o total disponível.</li>
+                        <li><strong>Equação:</strong> $$2x_1 + 1x_2 \leq 10$$</li>
+                        <li><strong>Explicação:</strong> Cada calça ($x_1$) consome 2 metros de tecido e cada camisa ($x_2$) consome 1 metro. A soma do tecido utilizado em todas as peças não pode ultrapassar os 10 metros disponíveis no estoque.</li>
+                    </ul>
+                </li>
+                <li><strong>Restrição de Costura:</strong>
+                    <ul class="list-disc ml-6">
+                        <li><strong>Propósito:</strong> Garante que o tempo total de costura utilizado não exceda as horas de trabalho disponíveis.</li>
+                        <li><strong>Equação:</strong> $$1x_1 + 2x_2 \leq 12$$</li>
+                        <li><strong>Explicação:</strong> Cada calça ($x_1$) requer 1 hora de costura e cada camisa ($x_2$) requer 2 horas. O tempo total dedicado à costura não pode ser maior que as 12 horas disponíveis.</li>
+                    </ul>
+                </li>
+            </ol>
+            <h4 class="text-lg font-bold mt-4 mb-2">Restrições de Não-Negatividade</h4>
+            <p>É fundamental garantir que as quantidades produzidas não sejam negativas, pois não é possível fabricar um número negativo de peças.</p>
+            <ul>
+                <li class="ml-6 list-disc"><strong>Equação:</strong> $$x_1, x_2 \geq 0$$</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Modelo Matemático Completo (Parte A)</h4>
+            <p>Juntando todos os componentes, o modelo matemático final para a maximização do lucro é:</p>
+            <p><strong>Maximizar:</strong></p>
+            $$
+            \begin{aligned}
+            Z &= 20x_1 + 15x_2 \\
+            \text{Sujeito a:} \\
+            2x_1 + x_2 &\leq 10 \quad \text{(Tecido)} \\
+            x_1 + 2x_2 &\leq 12 \quad \text{(Costura)} \\
+            x_1, x_2 &\geq 0
+            \end{aligned}
+            $$
+            <hr class="my-4">
+            <h3 class="text-xl font-bold mb-2">Parte B: Maximização da Produção</h3>
+            <h4 class="text-lg font-bold mt-4 mb-2">Análise do Problema</h4>
+            <p>Nesta segunda parte, o objetivo muda. Não estamos mais focados no lucro, mas sim em produzir o maior número total de peças (calças e camisas somadas), respeitando as mesmas limitações de tecido e tempo de costura.</p>
+            <h4 class="text-lg font-bold mt-4 mb-2">Variáveis de Decisão</h4>
+            <p>As variáveis de decisão permanecem as mesmas da parte anterior.</p>
+            <ul>
+                <li class="ml-6 list-disc">$x_1$: Representa a quantidade de <strong>calças</strong> a serem produzidas.</li>
+                <li class="ml-6 list-disc">$x_2$: Representa a quantidade de <strong>camisas</strong> a serem produzidas.</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Função Objetivo</h4>
+            <p>A meta agora é maximizar a quantidade total de itens fabricados.</p>
+            <ul>
+                <li class="ml-6 list-disc"><strong>Objetivo:</strong> Maximizar Produção</li>
+                <li class="ml-6 list-disc"><strong>Equação:</strong> $$\text{Maximizar } P = x_1 + x_2$$</li>
+                <li class="ml-6 list-disc"><strong>Explicação:</strong> A produção total ($P$) é simplesmente a soma do número de calças ($x_1$) com o número de camisas ($x_2$). Cada item contribui com 1 unidade para o total de peças produzidas.</li>
+            </ul>
+            <h4 class="text-lg font-bold mt-4 mb-2">Restrições</h4>
+            <p>As limitações de recursos não mudaram. Portanto, as restrições de tecido, costura e não-negatividade são exatamente as mesmas da Parte A.</p>
+            <ol class="list-decimal ml-6">
+                <li><strong>Restrição de Tecido:</strong> $$2x_1 + 1x_2 \leq 10$$</li>
+                <li><strong>Restrição de Costura:</strong> $$1x_1 + 2x_2 \leq 12$$</li>
+                <li><strong>Restrições de Não-Negatividade:</strong> $$x_1, x_2 \geq 0$$</li>
+            </ol>
+            <h4 class="text-lg font-bold mt-4 mb-2">Modelo Matemático Completo (Parte B)</h4>
+            <p>O modelo matemático final para a maximização da produção é:</p>
+            <p><strong>Maximizar:</strong></p>
+            $$
+            \begin{aligned}
+            P &= x_1 + x_2 \\
+            \text{Sujeito a:} \\
+            2x_1 + x_2 &\leq 10 \quad \text{(Tecido)} \\
+            x_1 + 2x_2 &\leq 12 \quad \text{(Costura)} \\
+            x_1, x_2 &\geq 0
+            \end{aligned}
+            $$
+            <div class="mt-8 flex justify-between items-center">
+                <a href="questao-04.html" class="text-blue-600 hover:underline font-medium">&larr; Questão Anterior</a>
+                <a href="index.html" class="text-gray-600 hover:underline font-medium">Voltar para a Aula</a>
+                <span class="text-gray-400 cursor-not-allowed">Próxima Questão &rarr;</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white mt-12 py-6 border-t">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 - Prof. Felipe Heitmann. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
