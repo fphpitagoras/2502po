@@ -377,7 +377,9 @@
             userNameDisplay.innerText = userName;
 
             const score = userAnswers.filter(a => a && a.correct).length;
-            const scoreString = `Você acertou ${score} de ${quizData.length} questões.`;
+            const totalQuestions = quizData.length;
+            const percentage = Math.round((score / totalQuestions) * 100);
+            const scoreString = `${userName} acertou ${score} questões de um total de ${totalQuestions} obtendo ${percentage}% de acertos.`;
             scoreText.innerText = scoreString;
             
             if (score >= 4) {
