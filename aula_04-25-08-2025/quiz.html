@@ -336,14 +336,14 @@
                 incorrectFeedbackSpan.classList.remove('hidden');
 
                 // Acha e marca a correta
-                const correctBtn = Array.from(answerButtons.children).find(btn => btn.dataset.correct === 'true');
-                if (correctBtn) {
-                    const correctFeedbackSpan = correctBtn.querySelector('.feedback-text-inline');
-                    correctBtn.classList.add('correct');
-                    correctFeedbackSpan.innerText = correctBtn.dataset.rationale;
-                    correctFeedbackSpan.classList.add('correct-feedback');
-                    correctFeedbackSpan.classList.remove('hidden');
-                }
+                // const correctBtn = Array.from(answerButtons.children).find(btn => btn.dataset.correct === 'true');
+                // if (correctBtn) {
+                //     const correctFeedbackSpan = correctBtn.querySelector('.feedback-text-inline');
+                //     correctBtn.classList.add('correct');
+                //     correctFeedbackSpan.innerText = correctBtn.dataset.rationale;
+                //     correctFeedbackSpan.classList.add('correct-feedback');
+                //     correctFeedbackSpan.classList.remove('hidden');
+                // }
             }
         }
         
