@@ -96,6 +96,10 @@
                             <!-- As alternativas serão inseridas aqui pelo JavaScript -->
                         </div>
 
+                        <div id="video-container" class="mt-6 hidden">
+                            <!-- O vídeo será inserido aqui pelo JavaScript -->
+                        </div>
+
                         <div id="hint-container" class="mt-4 p-4 rounded-lg bg-blue-50 border border-blue-200 hidden">
                             <p class="text-sm text-blue-700"><strong class="font-bold">Dica:</strong> <span id="hint-text"></span></p>
                         </div>
@@ -151,6 +155,7 @@
             { "text": "A produção de APA deve ser de 0 unidades.", "correct": false, "rationale": "Se a cervejaria não produzisse APA, ela poderia fazer no máximo 300 IPAs (limitado pelo lúpulo), com um lucro de R$1.500. É um bom lucro, mas não é o maior possível." },
             { "text": "A produção de IPA deve ser de 300 unidades.", "correct": false, "rationale": "Produzir 300 IPAs é uma opção viável (usa 150kg de malte e 3.000g de lúpulo), resultando em um lucro de R$1.500. No entanto, existe outra combinação que gera um lucro ainda maior." }
         ],
+        "video": "https://www.youtube.com/embed/HAzSWBcOKhE",
         "hint": "Para resolver, defina variáveis para as quantidades de IPA (x) e APA (y). Seu objetivo é maximizar a função de lucro, respeitando os limites (restrições) de malte e lúpulo."
     },
     {
@@ -161,6 +166,7 @@
             { "text": "O investimento em anúncios de TV deve ser de R$ 100.000.", "correct": false, "rationale": "Essa opção é inviável. Um investimento de R$100.000 em TV exigiria 1.200 horas da equipe, muito acima das 480 horas disponíveis." },
             { "text": "O investimento em anúncios online deve ser de R$ 10.000.", "correct": false, "rationale": "Na combinação ideal, R$10.000 é o valor a ser investido em TV, não em anúncios online. Investir apenas R$10.000 online levaria a um alcance muito baixo." }
         ],
+        "video": "https://www.youtube.com/embed/X3BOi-p_LXM",
         "hint": "Defina o valor investido em cada mídia como uma variável. O desafio é maximizar o alcance total sem ultrapassar o orçamento e as horas de trabalho disponíveis."
     },
     {
@@ -171,6 +177,7 @@
             { "text": "A produção de mesas deve ser de 52 unidades.", "correct": true, "rationale": "Perfeito! Produzir 52 mesas e 20 cadeiras utiliza os recursos de madeira e horas de forma ótima, alcançando o lucro máximo de R$5.160." },
             { "text": "A produção de cadeiras deve ser de 52 unidades.", "correct": false, "rationale": "Atenção à variável! Na solução ótima, o número ideal de cadeiras é 20. 52 é a quantidade correta de mesas a serem produzidas." }
         ],
+        "video": "https://www.youtube.com/embed/2THPavwurBQ",
         "hint": "Pense em como maximizar o lucro. Defina variáveis para o número de mesas e cadeiras e crie as restrições com base nos limites de madeira e horas de trabalho."
     },
     {
@@ -181,6 +188,7 @@
             { "text": "A quantidade de projetos do Tipo A deve ser de 40.", "correct": false, "rationale": "Fazer 40 projetos do Tipo A (e 0 do Tipo B) é uma opção viável, pois consome 1.600h júnior e 800h sênior, gerando um faturamento de R$120.000. Contudo, não é a combinação de maior retorno." },
             { "text": "A quantidade de projetos do Tipo B deve ser de 30.", "correct": false, "rationale": "Cuidado com a troca! Na solução ótima, 30 é o número de projetos do Tipo A, não do Tipo B." }
         ],
+        "video": "https://www.youtube.com/embed/bm7jnCy8Dec",
         "hint": "O seu objetivo é maximizar o faturamento total. As horas de consultores sênior e júnior são suas restrições. Defina uma variável para cada tipo de projeto para encontrar a solução."
     },
     {
@@ -189,8 +197,9 @@
             { "text": "A área plantada com Milho deve ser de 60 hectares.", "correct": false, "rationale": "Plantar 60 hectares de milho (e 0 de soja) usaria toda a água disponível e geraria um retorno de R$36.000. É uma estratégia possível, mas não a mais lucrativa." },
             { "text": "A área plantada com Soja deve ser de 20 hectares.", "correct": false, "rationale": "Cuidado para não confundir as culturas. Na solução ideal, 20 hectares é a área que deve ser destinada ao Milho, não à Soja." },
             { "text": "A área plantada com Milho deve ser de 80 hectares.", "correct": false, "rationale": "Essa opção é inviável. Plantar 80 hectares de milho exigiria 16.000 m³ de água, ultrapassando a cota de 12.000 m³." },
-            { "text": "A área plantada com Soja deve ser de 80 hectares.", "correct": true, "rationale": "Exatamente! Plantar 80 hectares de Soja e 20 hectares de Milho utiliza todos os 100 hectares de terra e os 12.000 m³ de água. Essa é a combinação que gera o maior retorno possível para o fazendeiro: R$44.000." }
+            { "text": "A área plantada com Soja deve ser de 80 hectares.", "correct": true, "rationale": "Exatamente! Plantar 80 hectares de Soja e 20 hectares de Milho utiliza todos os 100 hectares de terra e e os 12.000 m³ de água. Essa é a combinação que gera o maior retorno possível para o fazendeiro: R$44.000." }
         ],
+        "video": "https://www.youtube.com/embed/CMzt35gtx4Y",
         "hint": "Defina a área de cada cultura como uma variável. O seu objetivo é maximizar o retorno total, sem ultrapassar os limites de área (terra) e de recursos (água)."
     }
 ];
@@ -302,6 +311,7 @@
             skipBtn.classList.remove('hidden');
             hintContainer.classList.add('hidden');
             answerButtons.innerHTML = '';
+            document.getElementById('video-container').classList.add('hidden');
         }
 
         function selectAnswer(e) {
@@ -354,6 +364,23 @@
                 //     correctFeedbackSpan.classList.add('correct-feedback');
                 //     correctFeedbackSpan.classList.remove('hidden');
                 // }
+            }
+            showVideo();
+        }
+
+        function showVideo() {
+            const videoContainer = document.getElementById('video-container');
+            const currentQuestion = quizData[currentQuestionIndex];
+            if (currentQuestion.video) {
+                videoContainer.innerHTML = `
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Resolução em Vídeo</h3>
+                    <iframe width="100%" height="315" src="${currentQuestion.video}?autoplay=1"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            class="rounded-lg">
+                    </iframe>`;
+                videoContainer.classList.remove('hidden');
             }
         }
         
