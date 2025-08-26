@@ -140,59 +140,69 @@
 
     <script>
         // --- DADOS DO QUIZ ---
-        const quizData = [
-             {
-                question: "Uma cervejaria produz IPA (lucro R$5) e APA (lucro R$4). A IPA usa 0,5kg de malte e 10g de lúpulo; a APA, 0,4kg de malte e 6g de lúpulo. Com 200kg de malte e 3000g de lúpulo no estoque, qual produção maximiza o lucro?",
-                answers: [
-                    { text: "A produção de APA deve ser de 500 unidades.", correct: true, rationale: "Isso mesmo! Produzir 500 APAs e nenhuma IPA usa todo o lúpulo e dá o maior lucro que a gente consegue com esses estoques." },
-                    { text: "A produção de IPA deve ser de 400 unidades.", correct: false, rationale: "Opa, cuidado. 400 IPAs gastariam todo o malte, mas aí faltaria lúpulo pra tudo isso." },
-                    { text: "A produção de APA deve ser de 0 unidades.", correct: false, rationale: "Deixar de fazer APA não é uma boa. Focar só em um produto nem sempre dá o melhor resultado." },
-                    { text: "A produção de IPA deve ser de 300 unidades.", correct: false, rationale: "Se o problema fosse só o lúpulo, daria pra fazer 300 IPAs. Mas aí o malte não seria suficiente." }
-                ],
-                hint: "Para montar o problema, você pode chamar a quantidade de IPA de uma variável e a de APA de outra. O objetivo é maximizar o lucro total, respeitando os limites de malte e lúpulo."
-            },
-            {
-                question: "Uma agência investe em anúncios online (alcance 4k) e TV (alcance 10k). O orçamento é de R$100.000 e a equipe tem 480h. Cada R$1.000 online gasta 4h; na TV, 12h. Para o alcance máximo, como investir?",
-                answers: [
-                    { text: "O investimento em anúncios de TV deve ser de R$ 40.000.", correct: false, rationale: "Se o problema fosse só o tempo da equipe, investir R$ 40.000 em TV seria o limite. Mas a combinação ideal com o orçamento é outra." },
-                    { text: "O investimento em anúncios online deve ser de R$ 90.000.", correct: true, rationale: "É isso aí! Com R$ 90.000 em anúncios online e R$ 10.000 na TV, a agência usa bem a grana e o tempo da equipe para atingir o máximo de gente." },
-                    { text: "O investimento em anúncios de TV deve ser de R$ 100.000.", correct: false, rationale: "Investir toda a grana em TV estoura o limite de horas que a equipe tem pra trabalhar na campanha." },
-                    { text: "O investimento em anúncios online deve ser de R$ 10.000.", correct: false, rationale: "Esse é o valor ideal para o investimento em TV, não para os anúncios online." }
-                ],
-                hint: "O objetivo é alcançar mais gente. Chame o investimento online de uma variável e o de TV de outra. Você tem um limite de grana e um limite de tempo. Encontre a combinação que respeita os limites e maximiza o resultado."
-            },
-            {
-                question: "Uma marcenaria faz mesas (lucro R$80) e cadeiras (lucro R$50). A mesa usa 5m² de madeira e 10h de trabalho; a cadeira, 2m² e 8h. Com 300m² de madeira e 680h de trabalho disponíveis, qual a produção ideal para o lucro máximo?",
-                answers: [
-                    { text: "A produção de mesas deve ser de 60 unidades.", correct: false, rationale: "Se fizesse 60 mesas, a madeira acabaria certinho. O problema é que não teria gente suficiente pra trabalhar em tudo isso." },
-                    { text: "A produção de cadeiras deve ser de 85 unidades.", correct: false, rationale: "Se o limite fosse só as horas de trabalho, daria pra fazer 85 cadeiras. Mas aí faltaria madeira." },
-                    { text: "A produção de mesas deve ser de 52 unidades.", correct: true, rationale: "Na mosca! Fazer 52 mesas e 20 cadeiras é a combinação perfeita que usa os recursos sem ultrapassar os limites e dá o maior lucro." },
-                    { text: "A produção de cadeiras deve ser de 52 unidades.", correct: false, rationale: "Cuidado, esse é o número de mesas que precisa ser feito, não o de cadeiras." }
-                ],
-                hint: "Monte o problema pensando no lucro. Você vai precisar de uma variável para a quantidade de mesas e outra para a de cadeiras. Depois, veja as limitações de madeira e horas de trabalho."
-            },
-            {
-                question: "Uma consultoria faz projetos Tipo A (fatura R$3.000) e B (fatura R$2.500). O projeto A exige 20h sênior e 40h júnior; o B, 30h sênior e 20h júnior. Com 1.200h sênior e 1.600h júnior disponíveis, qual a combinação que maximiza o faturamento?",
-                answers: [
-                    { text: "A quantidade de projetos do Tipo A deve ser de 30.", correct: true, rationale: "Isso mesmo. Fazer 30 projetos do Tipo A e 20 do Tipo B é a melhor forma de usar as horas da equipe para conseguir o maior faturamento." },
-                    { text: "A quantidade de projetos do Tipo B deve ser de 40.", correct: false, rationale: "Se o limite fosse só as horas dos sêniors, 40 projetos do Tipo B seria o máximo. Mas aí faltariam horas dos júniors para outros projetos." },
-                    { text: "A quantidade de projetos do Tipo A deve ser de 40.", correct: false, rationale: "Se o problema fosse só as horas dos júniors, daria pra pegar 40 projetos do Tipo A. Mas os sêniors não dariam conta do recado." },
-                    { text: "A quantidade de projetos do Tipo B deve ser de 30.", correct: false, rationale: "Opa, 30 é o número de projetos do Tipo A na resposta certa, não do Tipo B." }
-                ],
-                hint: "Seu objetivo é maximizar o faturamento. As barreiras são as horas totais de cada tipo de consultor. Defina uma variável para os projetos Tipo A e outra para os Tipo B para encontrar a combinação ideal."
-            },
-            {
-                question: "Um fazendeiro planta Soja (retorno R$400/ha) e Milho (retorno R$600/ha) em 100 hectares. A soja usa 100m³ de água/ha; o milho, 200m³/ha. Com uma cota de 12.000m³ de água, qual o plantio que dá o maior retorno?",
-                answers: [
-                    { text: "A área plantada com Milho deve ser de 60 hectares.", correct: false, rationale: "Plantar 60 hectares de milho usaria toda a água. Aí não sobraria nada para a soja, e o retorno final não seria o melhor." },
-                    { text: "A área plantada com Soja deve ser de 20 hectares.", correct: false, rationale: "Quase lá! 20 hectares é a área ideal para o Milho, não para a Soja." },
-                    { text: "A área plantada com Milho deve ser de 80 hectares.", correct: false, rationale: "Cuidado com a troca! 80 hectares é a quantidade certa para a Soja, não para o Milho." },
-                    { text: "A área plantada com Soja deve ser de 80 hectares.", correct: true, rationale: "Exatamente! Plantar 80 hectares de soja e 20 de milho é a combinação que respeita os limites de terra e água e dá o maior retorno para o fazendeiro." }
-                ],
-                hint: "Pense em como ganhar mais dinheiro. Para isso, defina uma variável para a área de Soja e outra para a de Milho. Lembre-se que você não tem terra nem água infinitas."
-            }
-        ];
+        const quizData = 
 
+            [
+    {
+        "question": "Uma cervejaria artesanal busca maximizar seu lucro produzindo dois tipos de cerveja: IPA e APA. Os recursos e lucros são:\n- IPA: Lucro de R$5, consome 0,5kg de malte e 10g de lúpulo.\n- APA: Lucro de R$4, consome 0,4kg de malte e 6g de lúpulo.\nO estoque disponível é de 200kg de malte e 3.000g de lúpulo. Qual plano de produção maximiza o lucro?",
+        "answers": [
+            { "text": "A produção de APA deve ser de 500 unidades.", "correct": true, "rationale": "Exato! A produção de 500 APAs e 0 IPAs utiliza todo o lúpulo disponível e 200kg de malte. Essa combinação gera um lucro de R$2.000, o valor máximo possível dadas as restrições de estoque." },
+            { "text": "A produção de IPA deve ser de 400 unidades.", "correct": false, "rationale": "Essa produção não é viável. Para produzir 400 IPAs, seriam necessários 4.000g de lúpulo, mas o estoque é de apenas 3.000g." },
+            { "text": "A produção de APA deve ser de 0 unidades.", "correct": false, "rationale": "Se a cervejaria não produzisse APA, ela poderia fazer no máximo 300 IPAs (limitado pelo lúpulo), com um lucro de R$1.500. É um bom lucro, mas não é o maior possível." },
+            { "text": "A produção de IPA deve ser de 300 unidades.", "correct": false, "rationale": "Produzir 300 IPAs é uma opção viável (usa 150kg de malte e 3.000g de lúpulo), resultando em um lucro de R$1.500. No entanto, existe outra combinação que gera um lucro ainda maior." }
+        ],
+        "hint": "Para resolver, defina variáveis para as quantidades de IPA (x) e APA (y). Seu objetivo é maximizar a função de lucro, respeitando os limites (restrições) de malte e lúpulo."
+    },
+    {
+        "question": "Uma agência de publicidade quer maximizar o alcance de uma campanha com um orçamento de R$100.000 e 480 horas de trabalho da equipe. As opções de investimento são:\n- Anúncios Online: A cada R$1.000, atinge 4.000 pessoas e consome 4 horas de trabalho.\n- Anúncios de TV: A cada R$1.000, atinge 10.000 pessoas e consome 12 horas de trabalho.\nQual a melhor distribuição do orçamento para o alcance máximo?",
+        "answers": [
+            { "text": "O investimento em anúncios de TV deve ser de R$ 40.000.", "correct": false, "rationale": "Investir R$40.000 em TV é o máximo possível se considerarmos apenas a restrição de horas (12h * 40 = 480h). No entanto, essa escolha não otimiza o uso do orçamento e não leva ao alcance máximo." },
+            { "text": "O investimento em anúncios online deve ser de R$ 90.000.", "correct": true, "rationale": "Exato! Investir R$90.000 online e R$10.000 em TV consome exatamente o orçamento de R$100.000 e as 480 horas da equipe, resultando no maior alcance possível: 460.000 pessoas." },
+            { "text": "O investimento em anúncios de TV deve ser de R$ 100.000.", "correct": false, "rationale": "Essa opção é inviável. Um investimento de R$100.000 em TV exigiria 1.200 horas da equipe, muito acima das 480 horas disponíveis." },
+            { "text": "O investimento em anúncios online deve ser de R$ 10.000.", "correct": false, "rationale": "Na combinação ideal, R$10.000 é o valor a ser investido em TV, não em anúncios online. Investir apenas R$10.000 online levaria a um alcance muito baixo." }
+        ],
+        "hint": "Defina o valor investido em cada mídia como uma variável. O desafio é maximizar o alcance total sem ultrapassar o orçamento e as horas de trabalho disponíveis."
+    },
+    {
+        "question": "Uma marcenaria fabrica mesas e cadeiras e quer maximizar seu lucro. Os recursos disponíveis são 300m² de madeira e 680 horas de trabalho.\n- Mesa: Lucro de R$80, usa 5m² de madeira e 10 horas de trabalho.\n- Cadeira: Lucro de R$50, usa 2m² de madeira e 8 horas de trabalho.\nQual a combinação de produção que gera o lucro máximo?",
+        "answers": [
+            { "text": "A produção de mesas deve ser de 60 unidades.", "correct": false, "rationale": "Essa produção é viável. Fazer 60 mesas (e 0 cadeiras) usaria toda a madeira e 600 das 680 horas. O lucro seria de R$4.800, que é um bom valor, mas não é o máximo possível." },
+            { "text": "A produção de cadeiras deve ser de 85 unidades.", "correct": false, "rationale": "Produzir 85 cadeiras usaria todas as 680 horas de trabalho. No entanto, o lucro seria de R$4.250, inferior à solução ótima." },
+            { "text": "A produção de mesas deve ser de 52 unidades.", "correct": true, "rationale": "Perfeito! Produzir 52 mesas e 20 cadeiras utiliza os recursos de madeira e horas de forma ótima, alcançando o lucro máximo de R$5.160." },
+            { "text": "A produção de cadeiras deve ser de 52 unidades.", "correct": false, "rationale": "Atenção à variável! Na solução ótima, o número ideal de cadeiras é 20. 52 é a quantidade correta de mesas a serem produzidas." }
+        ],
+        "hint": "Pense em como maximizar o lucro. Defina variáveis para o número de mesas e cadeiras e crie as restrições com base nos limites de madeira e horas de trabalho."
+    },
+    {
+        "question": "Uma consultoria aloca seus profissionais em dois tipos de projeto, buscando maximizar o faturamento. A disponibilidade mensal é de 1.200 horas de consultores sênior e 1.600 horas de júnior.\n- Projeto Tipo A: Fatura R$3.000, exige 20h sênior e 40h júnior.\n- Projeto Tipo B: Fatura R$2.500, exige 30h sênior e 20h júnior.\nQual a combinação de projetos que maximiza o faturamento?",
+        "answers": [
+            { "text": "A quantidade de projetos do Tipo A deve ser de 30.", "correct": true, "rationale": "Isso mesmo! Fazer 30 projetos do Tipo A e 20 do Tipo B é a alocação ideal. Ela utiliza exatamente as 1.200h sênior e 1.600h júnior, maximizando o faturamento em R$140.000." },
+            { "text": "A quantidade de projetos do Tipo B deve ser de 40.", "correct": false, "rationale": "Realizar 40 projetos do Tipo B (e 0 do Tipo A) também é viável, pois consome 1.200h sênior e 800h júnior, faturando R$100.000. Existe uma solução melhor." },
+            { "text": "A quantidade de projetos do Tipo A deve ser de 40.", "correct": false, "rationale": "Fazer 40 projetos do Tipo A (e 0 do Tipo B) é uma opção viável, pois consome 1.600h júnior e 800h sênior, gerando um faturamento de R$120.000. Contudo, não é a combinação de maior retorno." },
+            { "text": "A quantidade de projetos do Tipo B deve ser de 30.", "correct": false, "rationale": "Cuidado com a troca! Na solução ótima, 30 é o número de projetos do Tipo A, não do Tipo B." }
+        ],
+        "hint": "O seu objetivo é maximizar o faturamento total. As horas de consultores sênior e júnior são suas restrições. Defina uma variável para cada tipo de projeto para encontrar a solução."
+    },
+    {
+        "question": "Um fazendeiro possui 100 hectares de terra e uma cota de 12.000 m³ de água para irrigação. Ele pode plantar Soja ou Milho e quer maximizar seu retorno financeiro.\n- Soja: Retorno de R$400 por hectare, consome 100 m³ de água por hectare.\n- Milho: Retorno de R$600 por hectare, consome 200 m³ de água por hectare.\nQual a divisão de área entre as culturas que gera o maior retorno?",
+        "answers": [
+            { "text": "A área plantada com Milho deve ser de 60 hectares.", "correct": false, "rationale": "Plantar 60 hectares de milho (e 0 de soja) usaria toda a água disponível e geraria um retorno de R$36.000. É uma estratégia possível, mas não a mais lucrativa." },
+            { "text": "A área plantada com Soja deve ser de 20 hectares.", "correct": false, "rationale": "Cuidado para não confundir as culturas. Na solução ideal, 20 hectares é a área que deve ser destinada ao Milho, não à Soja." },
+            { "text": "A área plantada com Milho deve ser de 80 hectares.", "correct": false, "rationale": "Essa opção é inviável. Plantar 80 hectares de milho exigiria 16.000 m³ de água, ultrapassando a cota de 12.000 m³." },
+            { "text": "A área plantada com Soja deve ser de 80 hectares.", "correct": true, "rationale": "Exatamente! Plantar 80 hectares de Soja e 20 hectares de Milho utiliza todos os 100 hectares de terra e os 12.000 m³ de água. Essa é a combinação que gera o maior retorno possível para o fazendeiro: R$44.000." }
+        ],
+        "hint": "Defina a área de cada cultura como uma variável. O seu objetivo é maximizar o retorno total, sem ultrapassar os limites de área (terra) e de recursos (água)."
+    }
+];
+            
+            
+            
+            
+            
+            
+            
+            
+    
         // --- ELEMENTOS DO HTML ---
         const startScreen = document.getElementById('start-screen');
         const nameInput = document.getElementById('name-input');
