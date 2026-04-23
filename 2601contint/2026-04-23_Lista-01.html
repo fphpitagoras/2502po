@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Débitos, Créditos e Regra Patrimonial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .option-btn:disabled { cursor: not-allowed; }
+        .correct { background-color: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
+        .incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <div id="app" class="w-full max-w-3xl bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Header -->
+        <header class="bg-indigo-600 p-6 text-white text-center">
+            <h1 class="text-2xl font-bold">Contabilidade Introdutória</h1>
+            <p class="text-indigo-100 mt-1 opacity-90">Débitos, Créditos e Regra Patrimonial</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-200 h-2">
+            <div id="progress" class="bg-emerald-500 h-2 transition-all duration-500" style="width: 0%"></div>
+        </div>
+
+        <div id="game-container" class="p-6 md:p-10">
+            <!-- Question Meta -->
+            <div class="flex justify-between items-center mb-6">
+                <span id="question-counter" class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Questão 1 de 20</span>
+                <span id="current-score" class="text-sm font-bold text-emerald-600 bg-emerald-50 rounded-full px-3 py-1">Acertos: 0</span>
+            </div>
+
+            <!-- Question Content -->
+            <div id="question-area" class="fade-in">
+                <h2 id="question-text" class="text-xl font-semibold text-slate-800 leading-snug mb-6">Carregando pergunta...</h2>
+                
+                <button id="hint-btn" class="mb-6 text-indigo-600 text-sm font-medium flex items-center hover:text-indigo-800 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9.663 17h4.674a1 1 0 00.992-.883l.847-7.413a1.166 1.166 0 00-1.159-1.304H6.983a1.166 1.166 0 00-1.159 1.304l.847 7.413a1 1 0 00.992.883z" />
+                    </svg>
+                    Ver Dica
+                </button>
+                <div id="hint-box" class="hidden mb-6 p-4 bg-amber-50 border-l-4 border-amber-400 text-amber-800 text-sm italic rounded"></div>
+
+                <div id="options-container" class="space-y-3">
+                    <!-- Options injected here -->
+                </div>
+            </div>
+
+            <!-- Feedback Area -->
+            <div id="feedback-area" class="hidden mt-8 p-5 rounded-xl border fade-in">
+                <p id="rationale-text" class="text-sm leading-relaxed"></p>
+                <button id="next-btn" class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg"> Próxima Pergunta </button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="hidden p-10 text-center fade-in">
+            <div class="mb-6 inline-block p-4 bg-indigo-100 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800 mb-2">Quiz Finalizado!</h2>
+            <p class="text-slate-600 mb-8">Veja como você se saiu na análise patrimonial.</p>
+            <div class="flex justify-center gap-8 mb-10">
+                <div class="text-center">
+                    <p class="text-4xl font-black text-indigo-600" id="final-score">0</p>
+                    <p class="text-xs text-slate-400 uppercase font-bold tracking-widest mt-1">Acertos</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-4xl font-black text-slate-300">/</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-4xl font-black text-slate-800">20</p>
+                    <p class="text-xs text-slate-400 uppercase font-bold tracking-widest mt-1">Total</p>
+                </div>
+            </div>
+            <button onclick="location.reload()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-8 rounded-xl transition-all shadow-xl">
+                Reiniciar Quiz
+            </button>
+        </div>
+    </div>
+
+    <footer class="mt-8 text-slate-400 text-xs">
+        Desenvolvido para estudo de Contabilidade Introdutória &bull; 2024
+    </footer>
+
+    <script>
+        const quizData = [
+            {
+                question: "Os sócios iniciaram a empresa com um investimento de R$ 50.000,00 em dinheiro físico. Qual é o registro contábil adequado?",
+                options: [
+                    { text: "Débito em Caixa e Crédito em Capital Social", correct: true, rationale: "O dinheiro entrou na empresa (Ativo aumenta a Débito). A origem é o investimento (PL aumenta a Crédito)." },
+                    { text: "Débito em Capital Social e Crédito em Caixa", correct: false, rationale: "Um crédito no Ativo significa saída de recurso, o que não condiz com um investimento inicial." },
+                    { text: "Débito em Caixa e Débito em Capital Social", correct: false, rationale: "O método das partidas dobradas exige uma origem (Crédito) para cada aplicação (Débito)." },
+                    { text: "Crédito em Caixa e Crédito em Capital Social", correct: false, rationale: "Faltou o registro do destino do recurso (Aplicação/Débito)." }
+                ],
+                hint: "Pense no destino do recurso (Ativo) e na sua origem (Patrimônio Líquido)."
+            },
+            {
+                question: "A empresa comprou um veículo por R$ 30.000,00, pago totalmente à vista em dinheiro. Como registrar?",
+                options: [
+                    { text: "Débito em Caixa e Crédito em Veículos", correct: false, rationale: "Isso indicaria aumento de dinheiro e saída de veículo." },
+                    { text: "Débito em Veículos e Crédito em Caixa", correct: true, rationale: "A conta Veículos (Ativo) aumenta por Débito e a conta Caixa (Ativo) diminui por Crédito pelo pagamento." },
+                    { text: "Débito em Veículos e Crédito em Contas a Pagar", correct: false, rationale: "Como foi à vista, não há obrigação futura no Passivo." },
+                    { text: "Débito em Caixa e Crédito em Contas a Pagar", correct: false, rationale: "Isso seria o registro de um empréstimo em dinheiro." }
+                ],
+                hint: "Se o dinheiro saiu para pagar o bem, o Ativo (Caixa) deve diminuir via Crédito."
+            },
+            {
+                question: "Aquisição de Estoque de Mercadorias no valor de R$ 10.000,00 a prazo. Identifique a alternativa correta:",
+                options: [
+                    { text: "Débito em Fornecedores e Crédito em Estoque", correct: false, rationale: "Incorreto. Representaria baixa de dívida e saída de estoque." },
+                    { text: "Débito em Estoque e Crédito em Caixa", correct: false, rationale: "Isso seria para compra à vista, mas a operação foi a prazo." },
+                    { text: "Débito em Estoque e Crédito em Fornecedores", correct: true, rationale: "O Estoque (Ativo) aumenta por Débito e a conta Fornecedores (Passivo) aumenta por Crédito." },
+                    { text: "Crédito em Estoque e Crédito em Fornecedores", correct: false, rationale: "Faltou o lançamento a débito para representar a aplicação." }
+                ],
+                hint: "Você adquiriu bens (aplicação), mas criou uma dívida com terceiros (origem)."
+            },
+            {
+                question: "A empresa realizou o pagamento de R$ 5.000,00 a um Fornecedor em dinheiro, referente a uma dívida anterior. Registro:",
+                options: [
+                    { text: "Débito em Fornecedores e Crédito em Caixa", correct: true, rationale: "A redução de obrigação no Passivo exige um Débito e a saída de dinheiro no Ativo exige um Crédito." },
+                    { text: "Débito em Caixa e Crédito em Fornecedores", correct: false, rationale: "Isso aumentaria o dinheiro e a dívida simultaneamente." },
+                    { text: "Débito em Fornecedores e Crédito em Clientes", correct: false, rationale: "O recurso saiu do Caixa, não de um direito contra clientes." },
+                    { text: "Débito em Contas a Pagar e Crédito em Fornecedores", correct: false, rationale: "Isso não registra o desembolso de dinheiro." }
+                ],
+                hint: "Pagar uma dívida reduz o Passivo (Débito) e o Ativo (Crédito)."
+            },
+            {
+                question: "A empresa obteve um empréstimo bancário de R$ 20.000,00, depositado imediatamente. Indique o lançamento:",
+                options: [
+                    { text: "Débito em Bancos e Crédito em Empréstimos a Pagar", correct: true, rationale: "O saldo bancário (Ativo) aumenta via Débito e a obrigação (Passivo) aumenta via Crédito." },
+                    { text: "Débito em Empréstimos a Pagar e Crédito em Bancos", correct: false, rationale: "Isso representaria a quitação do empréstimo." },
+                    { text: "Débito em Bancos e Crédito em Caixa", correct: false, rationale: "Isso registraria um depósito de dinheiro que a empresa já tinha em mãos." },
+                    { text: "Débito em Empréstimos a Pagar e Débito em Bancos", correct: false, rationale: "Faltou o crédito para indicar a origem do recurso." }
+                ],
+                hint: "Aumento de Ativo (Bancos) é Débito; Aumento de Passivo (Dívida) é Crédito."
+            },
+            {
+                question: "Recebimento de R$ 2.000,00 em dinheiro de um Cliente que comprou a prazo anteriormente. Registro:",
+                options: [
+                    { text: "Débito em Caixa e Crédito em Clientes", correct: true, rationale: "Aumenta o Ativo Caixa (Débito) e diminui o Ativo Clientes (Crédito) pela baixa do direito." },
+                    { text: "Débito em Clientes e Crédito em Caixa", correct: false, rationale: "Incorreto. Representaria entrega de dinheiro em troca de um direito futuro." },
+                    { text: "Débito em Caixa e Crédito em Fornecedores", correct: false, rationale: "A origem foi a quitação de um direito, não uma dívida nova." },
+                    { text: "Crédito em Caixa e Crédito em Clientes", correct: false, rationale: "Entrada de dinheiro deve ser sempre um Débito no Ativo." }
+                ],
+                hint: "Troca-se um direito a receber por dinheiro disponível."
+            },
+            {
+                question: "Compra de Máquinas por R$ 15.000,00, pagas à vista via transferência bancária. Qual o lançamento?",
+                options: [
+                    { text: "Débito em Máquinas e Crédito em Bancos", correct: true, rationale: "Aumento do imobilizado (Débito) e redução do saldo bancário (Crédito)." },
+                    { text: "Débito em Bancos e Crédito em Máquinas", correct: false, rationale: "Correto para venda de máquinas, não compra." },
+                    { text: "Débito em Máquinas e Crédito em Fornecedores", correct: false, rationale: "Pagamento imediato não gera obrigação no passivo." },
+                    { text: "Débito em Máquinas e Crédito em Caixa", correct: false, rationale: "Foi via banco, não dinheiro físico." }
+                ],
+                hint: "Ativo aumenta por Débito e diminui por Crédito."
+            },
+            {
+                question: "Pagamento da 1ª parcela de um Empréstimo (R$ 1.000,00) via débito em conta bancária. O que ocorre?",
+                options: [
+                    { text: "Débito em Empréstimos a Pagar e Crédito em Bancos", correct: true, rationale: "A dívida (Passivo) diminui por Débito e o saldo bancário (Ativo) diminui por Crédito." },
+                    { text: "Débito em Bancos e Crédito em Empréstimos a Pagar", correct: false, rationale: "Isso aumentaria a dívida." },
+                    { text: "Débito em Empréstimos a Pagar e Crédito em Caixa", correct: false, rationale: "Foi via banco, não caixa." },
+                    { text: "Débito em Fornecedores e Crédito em Bancos", correct: false, rationale: "A conta específica é Empréstimos." }
+                ],
+                hint: "Redução de Passivo = Débito."
+            },
+            {
+                question: "Um sócio aumentou o capital entregando um Imóvel de R$ 100.000,00. Registro:",
+                options: [
+                    { text: "Débito em Imóveis e Crédito em Capital Social", correct: true, rationale: "Aumento do Ativo (Débito) e do Patrimônio Líquido (Crédito)." },
+                    { text: "Débito em Imóveis e Crédito em Caixa", correct: false, rationale: "Isso seria compra com dinheiro próprio." },
+                    { text: "Débito em Capital Social e Crédito em Imóveis", correct: false, rationale: "Redução de capital." },
+                    { text: "Débito em Imóveis e Crédito em Empréstimos", correct: false, rationale: "O recurso veio de sócio, não de dívida." }
+                ],
+                hint: "O Capital Social é a conta de origem para investimentos de sócios."
+            },
+            {
+                question: "Compra de Material de Escritório para estoque (R$ 500,00) a prazo. Lançamento:",
+                options: [
+                    { text: "Débito em Estoque de Materiais e Crédito em Contas a Pagar", correct: true, rationale: "Ativo aumenta pela entrada dos materiais e Passivo aumenta pela dívida." },
+                    { text: "Débito em Contas a Pagar e Crédito em Estoque", correct: false, rationale: "Registro para devolução ou pagamento." },
+                    { text: "Débito em Estoque e Crédito em Caixa", correct: false, rationale: "Lançamento para compra à vista." },
+                    { text: "Débito em Caixa e Crédito em Contas a Pagar", correct: false, rationale: "Não reflete a entrada dos bens." }
+                ],
+                hint: "Aplicação no Ativo; Origem no Passivo (Dívida)."
+            },
+            {
+                question: "Depósito de R$ 3.000,00 em dinheiro na conta bancária da própria empresa:",
+                options: [
+                    { text: "Débito em Bancos e Crédito em Caixa", correct: true, rationale: "Ativo Bancos aumenta (Débito) e Ativo Caixa diminui (Crédito)." },
+                    { text: "Débito em Caixa e Crédito em Bancos", correct: false, rationale: "Registro para saque." },
+                    { text: "Débito em Bancos e Crédito em Contas a Pagar", correct: false, rationale: "O dinheiro já era da empresa." },
+                    { text: "Crédito em Bancos e Crédito em Caixa", correct: false, rationale: "Falta o lançamento a débito." }
+                ],
+                hint: "Aumento de Ativo = Débito; Diminuição de Ativo = Crédito."
+            },
+            {
+                question: "Saque de R$ 1.000,00 da conta bancária para o Caixa do escritório:",
+                options: [
+                    { text: "Débito em Caixa e Crédito em Bancos", correct: true, rationale: "Ativo Caixa aumenta (Débito) e Ativo Bancos diminui (Crédito)." },
+                    { text: "Débito em Bancos e Crédito em Caixa", correct: false, rationale: "Lançamento para depósito." },
+                    { text: "Débito em Caixa e Crédito em Capital Social", correct: false, rationale: "O recurso veio do banco, não do sócio." },
+                    { text: "Débito em Contas a Pagar e Crédito em Bancos", correct: false, rationale: "Não houve pagamento de dívida." }
+                ],
+                hint: "A fonte é o Banco (Crédito) e o destino é o Caixa (Débito)."
+            },
+            {
+                question: "Compra de Terreno por R$ 50.000,00, via Notas Promissórias (Títulos a Pagar):",
+                options: [
+                    { text: "Débito em Terrenos e Crédito em Títulos a Pagar", correct: true, rationale: "Ativo Terrenos aumenta e Passivo Títulos a Pagar aumenta." },
+                    { text: "Débito em Títulos a Pagar e Crédito em Terrenos", correct: false, rationale: "Registro para venda/baixa." },
+                    { text: "Débito em Terrenos e Crédito em Bancos", correct: false, rationale: "Pagamento não foi via banco." },
+                    { text: "Débito em Terrenos e Crédito em Capital Social", correct: false, rationale: "Não foi investimento de sócio." }
+                ],
+                hint: "Notas promissórias aumentam as obrigações no Passivo."
+            },
+            {
+                question: "Renegociação de dívida: Fornecedor (R$ 5.000,00) transformado em Nota Promissória:",
+                options: [
+                    { text: "Débito em Fornecedores e Crédito em Títulos a Pagar", correct: true, rationale: "Troca no Passivo: diminuição de Fornecedores (Débito) e aumento de Títulos a Pagar (Crédito)." },
+                    { text: "Débito em Títulos a Pagar e Crédito em Fornecedores", correct: false, rationale: "Inversão da lógica da renegociação." },
+                    { text: "Débito em Fornecedores e Crédito em Caixa", correct: false, rationale: "Não houve pagamento em dinheiro." },
+                    { text: "Débito em Bancos e Crédito em Títulos a Pagar", correct: false, rationale: "Indicaria entrada de dinheiro no banco." }
+                ],
+                hint: "Um Passivo diminui e outro surge."
+            },
+            {
+                question: "Sócios aumentaram o capital com Computadores (R$ 12.000,00). Registro:",
+                options: [
+                    { text: "Débito em Computadores e Crédito em Capital Social", correct: true, rationale: "Aumenta Ativo imobilizado (Débito) e Patrimônio Líquido (Crédito)." },
+                    { text: "Débito em Capital Social e Crédito em Computadores", correct: false, rationale: "Redução de patrimônio." },
+                    { text: "Débito em Computadores e Crédito em Fornecedores", correct: false, rationale: "Compra a prazo, não capital." },
+                    { text: "Débito em Caixa e Crédito em Capital Social", correct: false, rationale: "Entregaram bens, não dinheiro." }
+                ],
+                hint: "Aumento de bens via sócios é Crédito em Capital Social."
+            },
+            {
+                question: "Pagamento antecipado (R$ 2.000,00) a um Fornecedor via banco. Mercadoria não chegou:",
+                options: [
+                    { text: "Débito em Adiantamento a Fornecedores e Crédito em Bancos", correct: true, rationale: "Surge um Direito (Ativo) pelo pagamento antecipado e sai dinheiro do banco." },
+                    { text: "Débito em Estoque e Crédito em Bancos", correct: false, rationale: "Só se aumenta estoque quando a mercadoria entra." },
+                    { text: "Débito em Bancos e Crédito em Adiantamento a Fornecedores", correct: false, rationale: "Seria para recebimento." },
+                    { text: "Débito em Fornecedores e Crédito em Bancos", correct: false, rationale: "Usado para pagar dívidas já existentes." }
+                ],
+                hint: "Pagar antes de receber gera um DIREITO (Ativo)."
+            },
+            {
+                question: "Empresa recebeu sinal (R$ 3.000,00) de cliente por produto futuro:",
+                options: [
+                    { text: "Débito em Caixa e Crédito em Adiantamento de Clientes", correct: true, rationale: "Entra dinheiro no Ativo e surge obrigação (Passivo) de entregar o produto." },
+                    { text: "Débito em Clientes e Crédito em Caixa", correct: false, rationale: "Incorreto. Indica saída de dinheiro." },
+                    { text: "Débito em Caixa e Crédito em Clientes", correct: false, rationale: "Seria baixa de dívida antiga do cliente." },
+                    { text: "Débito em Adiantamento de Clientes e Crédito em Caixa", correct: false, rationale: "Devolução do sinal." }
+                ],
+                hint: "Receber antes de entregar gera uma OBRIGAÇÃO (Passivo)."
+            },
+            {
+                question: "Pagamento de Nota Promissória (R$ 1.500,00) em dinheiro. Registro:",
+                options: [
+                    { text: "Débito em Títulos a Pagar e Crédito em Caixa", correct: true, rationale: "Obrigação no Passivo diminui por Débito e o Ativo Caixa diminui por Crédito." },
+                    { text: "Débito em Títulos a Pagar e Crédito em Bancos", correct: false, rationale: "Enunciado diz dinheiro (caixa)." },
+                    { text: "Débito em Caixa e Crédito em Títulos a Pagar", correct: false, rationale: "Emissão da nota/recebimento de recurso." },
+                    { text: "Débito em Fornecedores e Crédito em Caixa", correct: false, rationale: "Conta errada para a natureza da dívida." }
+                ],
+                hint: "Redução de dívida = Débito."
+            },
+            {
+                question: "Devolução de Estoque (R$ 1.000,00) por defeito. Fornecedor abateu dívida pendente:",
+                options: [
+                    { text: "Débito em Fornecedores e Crédito em Estoque", correct: true, rationale: "Dívida diminui (Débito) e Ativo Estoque também diminui (Crédito) pela saída." },
+                    { text: "Débito em Estoque e Crédito em Fornecedores", correct: false, rationale: "Compra original." },
+                    { text: "Débito em Caixa e Crédito em Estoque", correct: false, rationale: "Empresa não recebeu dinheiro." },
+                    { text: "Débito em Fornecedores e Crédito em Caixa", correct: false, rationale: "Pagamento em dinheiro." }
+                ],
+                hint: "Devolver bens reduz o Ativo e a dívida (Passivo)."
+            },
+            {
+                question: "Compra de Software/Patente (R$ 8.000,00) parcelado a partir do próximo mês:",
+                options: [
+                    { text: "Débito em Marcas e Patentes e Crédito em Contas a Pagar", correct: true, rationale: "Ativo Intangível aumenta (Débito) e Passivo aumenta (Crédito)." },
+                    { text: "Débito em Contas a Pagar e Crédito em Marcas e Patentes", correct: false, rationale: "Baixa de patente e redução de dívida." },
+                    { text: "Débito em Marcas e Patentes e Crédito em Bancos", correct: false, rationale: "Compra foi parcelada, não à vista via banco." },
+                    { text: "Débito em Marcas e Patentes e Crédito em Caixa", correct: false, rationale: "Compra foi a prazo." }
+                ],
+                hint: "Patentes são bens (Ativos Intangíveis)."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        const elements = {
+            questionText: document.getElementById('question-text'),
+            questionCounter: document.getElementById('question-counter'),
+            scoreDisplay: document.getElementById('current-score'),
+            optionsContainer: document.getElementById('options-container'),
+            feedbackArea: document.getElementById('feedback-area'),
+            rationaleText: document.getElementById('rationale-text'),
+            nextBtn: document.getElementById('next-btn'),
+            progress: document.getElementById('progress'),
+            gameContainer: document.getElementById('game-container'),
+            resultScreen: document.getElementById('result-screen'),
+            finalScore: document.getElementById('final-score'),
+            hintBtn: document.getElementById('hint-btn'),
+            hintBox: document.getElementById('hint-box')
+        };
+
+        function initQuiz() {
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            answered = false;
+            const q = quizData[currentQuestion];
+            
+            // UI Updates
+            elements.questionCounter.innerText = `Questão ${currentQuestion + 1} de ${quizData.length}`;
+            elements.questionText.innerText = q.question;
+            elements.progress.style.width = `${((currentQuestion) / quizData.length) * 100}%`;
+            elements.feedbackArea.classList.add('hidden');
+            elements.optionsContainer.innerHTML = '';
+            
+            // Hint Logic
+            elements.hintBox.innerText = q.hint;
+            elements.hintBox.classList.add('hidden');
+
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = "option-btn w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-indigo-300 hover:bg-indigo-50 transition-all font-medium text-slate-700 flex justify-between items-center group";
+                btn.innerHTML = `<span>${opt.text}</span> <span class="opacity-0 group-hover:opacity-100 transition-opacity">→</span>`;
+                btn.onclick = () => handleAnswer(index);
+                elements.optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(index) {
+            if (answered) return;
+            answered = true;
+
+            const q = quizData[currentQuestion];
+            const isCorrect = q.options[index].correct;
+            const btns = elements.optionsContainer.getElementsByTagName('button');
+
+            // Visual feedback on buttons
+            for (let i = 0; i < btns.length; i++) {
+                btns[i].disabled = true;
+                if (q.options[i].correct) {
+                    btns[i].classList.add('correct');
+                } else if (i === index) {
+                    btns[i].classList.add('incorrect');
+                }
+            }
+
+            if (isCorrect) {
+                score++;
+                elements.scoreDisplay.innerText = `Acertos: ${score}`;
+                elements.feedbackArea.classList.replace('border-red-200', 'border-emerald-200');
+                elements.feedbackArea.classList.add('bg-emerald-50');
+            } else {
+                elements.feedbackArea.classList.add('bg-red-50', 'border-red-200');
+            }
+
+            elements.rationaleText.innerHTML = `<strong>${isCorrect ? 'Correto!' : 'Ops, incorreto.'}</strong> ${q.options[index].rationale}`;
+            elements.feedbackArea.classList.remove('hidden');
+            
+            if (currentQuestion === quizData.length - 1) {
+                elements.nextBtn.innerText = "Ver Resultado Final";
+            }
+        }
+
+        elements.nextBtn.onclick = () => {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        };
+
+        elements.hintBtn.onclick = () => {
+            elements.hintBox.classList.toggle('hidden');
+        };
+
+        function showResults() {
+            elements.progress.style.width = '100%';
+            elements.gameContainer.classList.add('hidden');
+            elements.resultScreen.classList.remove('hidden');
+            elements.finalScore.innerText = score;
+        }
+
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>
